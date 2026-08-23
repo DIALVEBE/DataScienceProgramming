@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bilingual course site for Data Science Programming.">
+    <title>Data Science Programming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="home">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Data Science Programming home">
+        <span class="brand-mark">DSP</span>
+        <span>
+          <strong>Data Science Programming</strong>
+          <small>Universidad Santo Tomás</small>
+        </span>
+      </a>
+      <nav class="header-actions" aria-label="Primary navigation">
+        <a href="#sessions" data-i18n="nav.sessions">Sessions</a>
+        <a href="#course-map" data-i18n="nav.map">Course Map</a>
+        <div class="language-switch" aria-label="Language selector">
+          <button type="button" class="lang-button is-active" data-lang="en">EN</button>
+          <button type="button" class="lang-button" data-lang="es">ES</button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero course-hero">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="home.eyebrow">Academic Space</p>
+          <h1 data-i18n="home.title">Data Science Programming</h1>
+          <p class="hero-lead" data-i18n="home.lead">
+            A bilingual, student-facing route for learning Python programming as a foundation for data analysis, automation, visualization, and reusable analytical workflows.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="sessions/session-01/" data-i18n="home.start">Start Session 01</a>
+            <a class="button ghost" href="#sessions" data-i18n="home.viewSessions">View all sessions</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Course signal">
+          <div class="orbit-grid">
+            <span>Python</span>
+            <span>Data</span>
+            <span>EDA</span>
+            <span>NumPy</span>
+            <span>Pandas</span>
+            <span>Polars</span>
+            <span>Viz</span>
+            <span>Reuse</span>
+          </div>
+          <div class="code-signal" aria-hidden="true">
+            <span>df</span><span>.</span><span>groupby</span><span>(</span><span>"question"</span><span>)</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-band" id="course-map">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="map.eyebrow">Learning Route</p>
+          <h2 data-i18n="map.title">From first variables to reusable data workflows</h2>
+        </div>
+        <div class="route-grid">
+          <article>
+            <span class="route-step">01</span>
+            <h3 data-i18n="map.step1.title">Represent</h3>
+            <p data-i18n="map.step1.text">Use variables, types, and expressions to model information.</p>
+          </article>
+          <article>
+            <span class="route-step">02</span>
+            <h3 data-i18n="map.step2.title">Structure</h3>
+            <p data-i18n="map.step2.text">Organize values with lists, dictionaries, arrays, and tabular data.</p>
+          </article>
+          <article>
+            <span class="route-step">03</span>
+            <h3 data-i18n="map.step3.title">Analyze</h3>
+            <p data-i18n="map.step3.text">Transform, summarize, visualize, and interpret datasets.</p>
+          </article>
+          <article>
+            <span class="route-step">04</span>
+            <h3 data-i18n="map.step4.title">Generalize</h3>
+            <p data-i18n="map.step4.text">Move from isolated answers to reusable, documented solutions.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-band" id="schedule">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="schedule.eyebrow">Schedule</p>
+          <h2 data-i18n="schedule.title">Seven Tuesday meetings</h2>
+          <p data-i18n="schedule.note">The calendar is recreated as text so it remains readable, responsive, and bilingual.</p>
+        </div>
+        <div class="schedule-grid" id="scheduleGrid"></div>
+      </section>
+
+      <section class="section-band" id="sessions">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="sessions.eyebrow">Table of Contents</p>
+          <h2 data-i18n="sessions.title">Sessions</h2>
+          <p data-i18n="sessions.note">The course is organized as a sequence of seven sessions. New pages will be activated as the academic space advances.</p>
+        </div>
+        <div class="sessions-table-wrap">
+          <table class="sessions-table">
+            <thead>
+              <tr>
+                <th data-i18n="table.session">Session</th>
+                <th data-i18n="table.topic">Topic</th>
+                <th data-i18n="table.focus">Focus</th>
+                <th data-i18n="table.status">Status</th>
+                <th data-i18n="table.action">Open</th>
+              </tr>
+            </thead>
+            <tbody id="sessionRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span data-i18n="footer.text">Data Science Programming · Student-facing bilingual resources</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

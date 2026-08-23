@@ -1,0 +1,113 @@
+/* Shared styles for Session 1 student guides.
+   Works well with GitHub Pages / Jekyll layouts that load this file. */
+
+:root {
+  --dsp-border: #d0d7de;
+  --dsp-bg-soft: #f6f8fa;
+  --dsp-primary-bg: #eef6ff;
+  --dsp-primary-border: #0969da;
+  --dsp-warning-bg: #fff8c5;
+  --dsp-warning-border: #9a6700;
+  --dsp-success-bg: #dafbe1;
+  --dsp-success-border: #1a7f37;
+  --dsp-red-bg: #ffebe9;
+  --dsp-red-border: #cf222e;
+}
+
+.callout,
+.terminal-card,
+.mini-card,
+.level-card,
+.final-banner {
+  border: 1px solid var(--dsp-border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin: 1rem 0;
+}
+
+.callout-primary {
+  background: var(--dsp-primary-bg);
+  border-left: 5px solid var(--dsp-primary-border);
+}
+
+.callout-warning {
+  background: var(--dsp-warning-bg);
+  border-left: 5px solid var(--dsp-warning-border);
+}
+
+.callout-success {
+  background: var(--dsp-success-bg);
+  border-left: 5px solid var(--dsp-success-border);
+}
+
+.terminal-card {
+  background: var(--dsp-bg-soft);
+}
+
+.three-grid,
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.mini-card,
+.level-card {
+  margin: 0;
+  min-width: 0;
+}
+
+.level-green {
+  background: var(--dsp-success-bg);
+  border-top: 4px solid var(--dsp-success-border);
+}
+
+.level-yellow {
+  background: var(--dsp-warning-bg);
+  border-top: 4px solid var(--dsp-warning-border);
+}
+
+.level-red {
+  background: var(--dsp-red-bg);
+  border-top: 4px solid var(--dsp-red-border);
+}
+
+.final-banner {
+  text-align: center;
+  background: var(--dsp-bg-soft);
+}
+
+details {
+  border: 1px solid var(--dsp-border);
+  border-radius: 10px;
+  padding: .65rem .85rem;
+  margin: .75rem 0;
+}
+
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Keep wide diagrams/tables usable on mobile. */
+pre,
+table {
+  max-width: 100%;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+table {
+  display: block;
+  overflow-x: auto;
+}
+
+@media (max-width: 800px) {
+  .three-grid,
+  .level-grid {
+    grid-template-columns: 1fr;
+  }
+}
