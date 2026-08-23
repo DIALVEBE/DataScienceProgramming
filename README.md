@@ -1,15 +1,84 @@
 # Data Science Programming
 
-Public GitHub Pages site for the academic space **Data Science Programming**.
+Welcome to the public repository for the academic space **Data Science Programming**.
 
-The site is a static bilingual resource with English as the default language and Spanish as an alternate view. Session content lives under `sessions/`.
+This space contains bilingual study materials for learning Python programming as a foundation for Data Science. English is the default language, and Spanish is available from the language selector on the website.
 
-## Structure
+## Course Website
 
-- `index.html`: course home and session table of contents.
-- `sessions/session-01/index.html`: session viewer.
-- `sessions/session-01_en.md`: English source for Session 01.
-- `sessions/session-01_es.md`: Spanish source for Session 01.
-- `styles.css`: dark neon responsive visual system.
-- `script.js`: language switching, Markdown loading, table of contents, and session rendering.
+Open the course site here:
 
+https://dialvebe.github.io/DataScienceProgramming/
+
+## Sessions
+
+| Session | Topic | Link |
+|---:|---|---|
+| 01 | Programming for Data Science: First Steps with Python | https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/ |
+| 02 | Data structures | Coming soon |
+| 03 | NumPy foundations | Coming soon |
+| 04 | Pandas and Polars | Coming soon |
+| 05 | Loading and cleaning data | Coming soon |
+| 06 | Visualization and exploratory analysis | Coming soon |
+| 07 | Reusable analytical code | Coming soon |
+
+## Download the Materials
+
+To download the repository from GitHub:
+
+1. Open https://github.com/DIALVEBE/DataScienceProgramming
+2. Select **Code**.
+3. Select **Download ZIP**.
+
+To clone it with Git:
+
+```bash
+git clone https://github.com/DIALVEBE/DataScienceProgramming.git
+```
+
+## Languages
+
+- **EN**: English version.
+- **ES**: Spanish version.
+
+Use the language buttons on the website to switch between both versions.
+
+---
+
+## Versión en Español
+
+Bienvenido al repositorio público del espacio académico **Data Science Programming**.
+
+Este espacio contiene materiales bilingües para estudiar programación en Python como base para Ciencia de Datos. El idioma principal del sitio es inglés, y la versión en español está disponible desde el selector de idioma.
+
+### Sitio del Curso
+
+Abre el sitio del curso aquí:
+
+https://dialvebe.github.io/DataScienceProgramming/
+
+### Sesiones
+
+| Sesión | Tema | Enlace |
+|---:|---|---|
+| 01 | Programación para Data Science: primer contacto con Python | https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/ |
+| 02 | Estructuras de datos | Próximamente |
+| 03 | Fundamentos de NumPy | Próximamente |
+| 04 | Pandas y Polars | Próximamente |
+| 05 | Carga y limpieza de datos | Próximamente |
+| 06 | Visualización y análisis exploratorio | Próximamente |
+| 07 | Código analítico reutilizable | Próximamente |
+
+### Descargar los Materiales
+
+Para descargar el repositorio desde GitHub:
+
+1. Abre https://github.com/DIALVEBE/DataScienceProgramming
+2. Selecciona **Code**.
+3. Selecciona **Download ZIP**.
+
+Para clonarlo con Git:
+
+```bash
+git clone https://github.com/DIALVEBE/DataScienceProgramming.git
+```

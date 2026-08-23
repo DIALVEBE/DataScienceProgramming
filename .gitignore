@@ -8,6 +8,7 @@ build/
 .env
 .env.*
 *.log
+auxcodex.txt
 auxcodex/
 instructions*
 INSTRUCTIONS*
