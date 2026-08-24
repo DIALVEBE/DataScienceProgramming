@@ -38,6 +38,10 @@ const copy = {
     "action.pending": "Pending",
     "footer.text": "Data Science Programming · Student-facing bilingual resources",
     "lesson.contents": "Contents",
+    "lesson.resources": "Resources",
+    "lesson.notebookTitle": "Session 01 Notebook",
+    "lesson.notebookText": "Download the student notebook to practice the examples and exercises from this session.",
+    "lesson.downloadNotebook": "Download .ipynb",
     "lesson.loading": "Loading session...",
     "lesson.error": "The session could not be loaded.",
     "lesson.back": "Back to course table of contents"
@@ -79,6 +83,10 @@ const copy = {
     "action.pending": "Pendiente",
     "footer.text": "Data Science Programming · Recursos bilingües para estudiantes",
     "lesson.contents": "Contenido",
+    "lesson.resources": "Recursos",
+    "lesson.notebookTitle": "Notebook de la sesión 01",
+    "lesson.notebookText": "Descarga el notebook para practicar los ejemplos y ejercicios de esta sesión.",
+    "lesson.downloadNotebook": "Descargar .ipynb",
     "lesson.loading": "Cargando sesión...",
     "lesson.error": "No se pudo cargar la sesión.",
     "lesson.back": "Volver a la tabla de contenido del curso"

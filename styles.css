@@ -302,6 +302,7 @@ h3 {
 .sessions-table-wrap,
 .lesson-sidebar,
 .lesson-shell,
+.resource-panel,
 .callout,
 .terminal-card,
 .mini-card,
@@ -457,6 +458,32 @@ h3 {
 .lesson-shell {
   padding: clamp(28px, 4vw, 58px);
   overflow: hidden;
+}
+
+.resource-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 28px;
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(98, 247, 255, 0.1), rgba(255, 79, 216, 0.08));
+}
+
+.resource-panel h2 {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.resource-panel p:not(.eyebrow) {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.resource-panel .button {
+  flex: 0 0 auto;
 }
 
 .lesson-status {
@@ -692,6 +719,11 @@ details > summary {
   .level-grid,
   .orbit-grid {
     grid-template-columns: 1fr;
+  }
+
+  .resource-panel {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .sessions-table {
