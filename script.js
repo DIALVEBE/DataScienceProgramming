@@ -42,6 +42,8 @@ const copy = {
     "lesson.notebookText": "Download the practice notebooks for this restructured session: one guided version for students and one advanced version for extra challenge.",
     "lesson.downloadStudentNotebook": "Student Practice",
     "lesson.downloadAdvancedNotebook": "Advanced Practice",
+    "code.copy": "Copy",
+    "code.copied": "Copied",
     "lesson.loading": "Loading session...",
     "lesson.error": "The session could not be loaded.",
     "lesson.back": "Back to course table of contents"
@@ -87,6 +89,8 @@ const copy = {
     "lesson.notebookText": "Descarga los notebooks de práctica de esta sesión reestructurada: una versión guiada para estudiantes y una versión avanzada con mayor reto.",
     "lesson.downloadStudentNotebook": "Práctica estudiantes",
     "lesson.downloadAdvancedNotebook": "Práctica avanzada",
+    "code.copy": "Copiar",
+    "code.copied": "Copiado",
     "lesson.loading": "Cargando sesión...",
     "lesson.error": "No se pudo cargar la sesión.",
     "lesson.back": "Volver a la tabla de contenido del curso"
@@ -280,12 +284,16 @@ function renderNodes(nodes) {
 }
 
 function enhanceLesson() {
+  const lang = getLanguage();
+
   document.querySelectorAll(".markdown-body pre code.language-mermaid").forEach((code) => {
     const wrapper = document.createElement("div");
     wrapper.className = "mermaid";
     wrapper.textContent = code.textContent;
     code.closest("pre").replaceWith(wrapper);
   });
+
+  addCopyButtons(lang);
 
   document.querySelectorAll(".markdown-body h2").forEach((heading) => {
     if (!heading.id) heading.id = slugify(heading.textContent);
@@ -314,6 +322,53 @@ function enhanceLesson() {
     });
     mermaid.run({ querySelector: ".mermaid" });
   }
+}
+
+function addCopyButtons(lang) {
+  document.querySelectorAll(".markdown-body pre").forEach((pre) => {
+    if (pre.closest(".code-block")) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "code-block";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copy-button";
+    button.textContent = copy[lang]["code.copy"];
+    button.setAttribute("aria-label", copy[lang]["code.copy"]);
+
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(button);
+    wrapper.appendChild(pre);
+
+    button.addEventListener("click", async () => {
+      await copyText(pre.innerText);
+      button.textContent = copy[lang]["code.copied"];
+      button.classList.add("is-copied");
+
+      window.setTimeout(() => {
+        button.textContent = copy[lang]["code.copy"];
+        button.classList.remove("is-copied");
+      }, 1400);
+    });
+  });
+}
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
 }
 
 async function loadLesson(lang) {
