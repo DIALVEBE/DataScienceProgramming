@@ -421,10 +421,13 @@ h3 {
 }
 
 .footer-credits {
-  display: grid;
-  gap: 4px;
+  display: block;
   color: #d7e3f6;
   line-height: 1.45;
+}
+
+.footer-credits span {
+  display: block;
 }
 
 .footer-credits span:last-child {
