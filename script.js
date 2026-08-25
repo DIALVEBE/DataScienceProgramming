@@ -39,9 +39,10 @@ const copy = {
     "footer.text": "Data Science Programming · Student-facing bilingual resources",
     "lesson.contents": "Contents",
     "lesson.resources": "Resources",
-    "lesson.notebookTitle": "Session 01 Notebook",
-    "lesson.notebookText": "Download the student notebook to practice the examples and exercises from this session.",
-    "lesson.downloadNotebook": "Download .ipynb",
+    "lesson.notebookTitle": "Session 01 Practice Notebooks",
+    "lesson.notebookText": "Download the practice notebooks for this restructured session: one guided version for students and one advanced version for extra challenge.",
+    "lesson.downloadStudentNotebook": "Student Practice",
+    "lesson.downloadAdvancedNotebook": "Advanced Practice",
     "lesson.loading": "Loading session...",
     "lesson.error": "The session could not be loaded.",
     "lesson.back": "Back to course table of contents"
@@ -84,9 +85,10 @@ const copy = {
     "footer.text": "Data Science Programming · Recursos bilingües para estudiantes",
     "lesson.contents": "Contenido",
     "lesson.resources": "Recursos",
-    "lesson.notebookTitle": "Notebook de la sesión 01",
-    "lesson.notebookText": "Descarga el notebook para practicar los ejemplos y ejercicios de esta sesión.",
-    "lesson.downloadNotebook": "Descargar .ipynb",
+    "lesson.notebookTitle": "Notebooks de práctica de la sesión 01",
+    "lesson.notebookText": "Descarga los notebooks de práctica de esta sesión reestructurada: una versión guiada para estudiantes y una versión avanzada con mayor reto.",
+    "lesson.downloadStudentNotebook": "Práctica estudiantes",
+    "lesson.downloadAdvancedNotebook": "Práctica avanzada",
     "lesson.loading": "Cargando sesión...",
     "lesson.error": "No se pudo cargar la sesión.",
     "lesson.back": "Volver a la tabla de contenido del curso"
@@ -99,12 +101,12 @@ const sessions = [
     href: "sessions/session-01/",
     ready: true,
     en: {
-      topic: "Programming for Data Science: First Steps with Python",
-      focus: "Programming purpose, environments, variables, types, operators, decisions, functions, and debugging."
+      topic: "Python from Scratch",
+      focus: "Running code, variables, types, decisions, loops, data structures, functions, and moving from notebooks to scripts."
     },
     es: {
-      topic: "Programación para Data Science: primer contacto con Python",
-      focus: "Propósito de programar, ambientes, variables, tipos, operadores, decisiones, funciones y depuración."
+      topic: "Python desde cero",
+      focus: "Ejecución de código, variables, tipos, decisiones, ciclos, estructuras de datos, funciones y paso de notebooks a scripts."
     }
   },
   {

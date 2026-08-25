@@ -482,7 +482,15 @@ h3 {
   line-height: 1.55;
 }
 
-.resource-panel .button {
+.resource-actions {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.resource-actions .button {
   flex: 0 0 auto;
 }
 
@@ -724,6 +732,14 @@ details > summary {
   .resource-panel {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .resource-actions {
+    justify-content: stretch;
+  }
+
+  .resource-actions .button {
+    width: 100%;
   }
 
   .sessions-table {

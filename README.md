@@ -14,7 +14,7 @@ https://dialvebe.github.io/DataScienceProgramming/
 
 | Session | Topic | Link |
 |---:|---|---|
-| 01 | Programming for Data Science: First Steps with Python | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Download notebook](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion_01_Student.ipynb) |
+| 01 | Python from Scratch | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Estudiantes_New.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Avanzado_New.ipynb) |
 | 02 | Data structures | Coming soon |
 | 03 | NumPy foundations | Coming soon |
 | 04 | Pandas and Polars | Coming soon |
@@ -61,7 +61,7 @@ https://dialvebe.github.io/DataScienceProgramming/
 
 | Sesión | Tema | Enlace |
 |---:|---|---|
-| 01 | Programación para Data Science: primer contacto con Python | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Descargar notebook](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion_01_Student.ipynb) |
+| 01 | Python desde cero | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Estudiantes_New.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Avanzado_New.ipynb) |
 | 02 | Estructuras de datos | Próximamente |
 | 03 | Fundamentos de NumPy | Próximamente |
 | 04 | Pandas y Polars | Próximamente |

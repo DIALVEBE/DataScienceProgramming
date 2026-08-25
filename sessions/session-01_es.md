@@ -1,944 +1,1096 @@
 ---
 layout: default
-title: "Sesión 1 · Programación para Data Science: primer contacto con Python"
-description: "Guía de estudio sobre programación para Ciencia de Datos, lenguajes, ambiente de desarrollo y fundamentos iniciales de Python."
+title: "Sesión 1 — Python desde cero"
+description: "Fundamentos de Python para Data Science: variables, tipos, decisiones, ciclos, estructuras de datos y funciones."
 lang: es
 permalink: /es/session-01/
 ---
 
-# Sesión 1 · Programación para Data Science: primer contacto con Python
+# Data Science Programming — Sesión 1
+## Python desde cero: construir, decidir, repetir y organizar datos
 
-> **Idea central:** en Ciencia de Datos no programamos por programar. Escribimos código para representar datos, responder preguntas, automatizar procesos y construir soluciones reproducibles.
+Esta sesión construye una base común de programación con Python. El objetivo no es memorizar sintaxis, sino comprender cómo expresar instrucciones, representar datos, tomar decisiones, repetir procesos y organizar información para resolver problemas.
 
-<div class="callout callout-primary" markdown="1">
-
-## 🎯 Al finalizar esta sesión podrás
-
-- explicar para qué se utiliza la programación dentro de un flujo de Ciencia de Datos;
-- distinguir, a nivel general, el papel de **Python, R y Julia**;
-- reconocer los componentes básicos de un ambiente de desarrollo;
-- representar información mediante variables y tipos de datos de Python;
-- utilizar operadores y decisiones simples para resolver un problema;
-- interpretar errores básicos como información útil para depurar código;
-- avanzar desde una solución directa hacia una solución más general y reutilizable.
-
-</div>
-
----
-
-## 1. ¿Por qué programar en Ciencia de Datos?
-
-Imagina que recibimos este pequeño conjunto de datos:
-
-| customer | age | city | purchase | active |
-|---|---:|---|---:|:---:|
-| Laura | 31 | Tunja | 520000 | ✅ |
-| Carlos | 45 | Bogotá | 1250000 | ❌ |
-| Ana | 27 | Tunja | 890000 | ✅ |
-
-Con tres filas podemos responder muchas preguntas mirando la tabla. Pero ahora imagina que llegan **millones de registros cada día**.
-
-Queremos responder preguntas como:
-
-- ¿qué clientes compraron más de $1.000.000?;
-- ¿qué ciudad genera mayores ventas?;
-- ¿cuál es el valor promedio de compra?;
-- ¿hay datos incompletos o inconsistentes?;
-- ¿podemos repetir el análisis mañana sin hacerlo manualmente otra vez?
-
-La programación convierte estas preguntas en procesos que una computadora puede ejecutar.
+> **Idea central:** un programa es una secuencia de instrucciones que transforma datos en resultados.
 
 ```mermaid
 flowchart LR
-    A[Problema] --> B[Datos]
-    B --> C[Representar]
-    C --> D[Procesar]
-    D --> E[Analizar]
-    E --> F[Automatizar]
-    F --> G[Decidir]
+    A[Datos] --> B[Instrucciones]
+    B --> C[Decisiones]
+    C --> D[Repeticiones]
+    D --> E[Estructuras]
+    E --> F[Funciones]
+    F --> G[Resultado]
 ```
-
-### Tres conceptos esenciales
-
-| Concepto | Idea |
-|---|---|
-| **Algoritmo** | Secuencia ordenada de pasos para resolver un problema. |
-| **Código** | Representación de esos pasos utilizando un lenguaje de programación. |
-| **Programa** | Conjunto de instrucciones que una computadora puede ejecutar para realizar una tarea. |
-
-<div class="terminal-card" markdown="1">
-
-```text
-PROBLEMA
-  ↓
-"Necesito identificar compras altas"
-  ↓
-ALGORITMO
-  ↓
-1. Leer el valor de compra
-2. Compararlo con un umbral
-3. Clasificarlo
-  ↓
-CÓDIGO
-  ↓
-La computadora ejecuta la decisión
-```
-
-</div>
-
-### Programar no es memorizar comandos
-
-En Ciencia de Datos, programar implica principalmente:
-
-1. **entender el problema**;
-2. **representar los datos** de forma adecuada;
-3. **definir transformaciones y reglas**;
-4. **evaluar el resultado**;
-5. **hacer que la solución pueda repetirse**.
 
 ---
 
-## 2. Python, R y Julia
+## 1. Ejecutar código en un notebook
 
-Existen muchos lenguajes capaces de trabajar con datos. En Ciencia de Datos aparecen con frecuencia **Python, R y Julia**.
+Un notebook combina texto, código y resultados en celdas. Cada celda de código puede ejecutarse de forma independiente, aunque normalmente conviene avanzar de arriba hacia abajo para mantener un estado coherente.
+
+```text
+┌─────────────────────────────────────────────┐
+│ Celda Markdown                              │
+│ Explica una idea                            │
+├─────────────────────────────────────────────┤
+│ Celda de código                             │
+│ nombre = "Ana"                              │
+│ print(nombre)                               │
+├─────────────────────────────────────────────┤
+│ Salida                                      │
+│ Ana                                         │
+└─────────────────────────────────────────────┘
+```
+
+En Google Colab o Jupyter, una variable creada en una celda puede ser utilizada en celdas posteriores mientras el entorno continúe activo.
 
 ```mermaid
-flowchart TB
-    DS[Ciencia de Datos]
-    DS --> PY[Python]
-    DS --> R[R]
-    DS --> JU[Julia]
-    PY --> P1[Propósito general]
-    PY --> P2[Ecosistema de datos e IA]
-    R --> R1[Estadística]
-    R --> R2[Análisis y visualización]
-    JU --> J1[Computación científica]
-    JU --> J2[Alto rendimiento]
+flowchart TD
+    A[Escribir código] --> B[Ejecutar celda]
+    B --> C{¿Funcionó?}
+    C -- Sí --> D[Observar resultado]
+    C -- No --> E[Leer traceback]
+    E --> F[Corregir]
+    F --> B
+    D --> G[Modificar y experimentar]
+    G --> B
 ```
 
-| Lenguaje | Fortalezas generales | Uso frecuente |
-|---|---|---|
-| **Python** | Sintaxis legible, propósito general, gran ecosistema | Manipulación de datos, automatización, ML, IA, aplicaciones |
-| **R** | Ecosistema estadístico muy consolidado | Estadística, investigación, análisis y visualización |
-| **Julia** | Orientado al cálculo científico y alto rendimiento | Computación numérica, simulación, investigación científica |
+### `print()`: mostrar información
 
-### ¿Por qué Python?
+`print()` permite enviar información a la salida.
 
-Python permite utilizar el mismo lenguaje para diferentes etapas de un proyecto:
-
-```text
-Datos → Limpieza → Análisis → Visualización → Machine Learning → Automatización
-             └────────────── Python puede participar en todas ──────────────┘
+```python
+print("Hola, Ciencia de Datos")
+print("Estoy escribiendo mi primer programa")
 ```
 
-A lo largo del curso aparecerán bibliotecas especializadas como **NumPy, Pandas, Polars, Matplotlib, Seaborn y Plotly**. En esta primera sesión el objetivo es comprender el lenguaje sobre el que se apoyan.
+La salida es visible, pero `print()` no almacena por sí mismo el valor mostrado.
 
 ---
 
-## 3. El ambiente de desarrollo
+## 2. Variables: nombres asociados a valores
 
-Para ejecutar código necesitamos más que escribir texto. Un ambiente de desarrollo reúne diferentes componentes.
-
-```mermaid
-flowchart LR
-    A[Editor / Notebook] --> B[Intérprete de Python]
-    B --> C[Bibliotecas]
-    C --> D[Programa]
-    D --> E[Resultado]
-```
-
-### Componentes principales
-
-| Componente | Función |
-|---|---|
-| **Editor** | Lugar donde escribimos código. |
-| **Intérprete** | Ejecuta las instrucciones escritas en Python. |
-| **Notebook** | Combina código, texto, resultados y visualizaciones en celdas. |
-| **Biblioteca** | Código reutilizable creado para resolver tareas específicas. |
-| **Entorno** | Conjunto controlado de versión de Python y dependencias de un proyecto. |
-
-### Script, Notebook e IDE
-
-<div class="three-grid" markdown="1">
-
-<div class="mini-card" markdown="1">
-
-### 📄 Script
-
-```text
-analysis.py
-```
-
-Archivo de código ejecutable. Es apropiado para procesos reproducibles y automatización.
-
-</div>
-
-<div class="mini-card" markdown="1">
-
-### 📓 Notebook
-
-```text
-Celda 1 → código
-Celda 2 → resultado
-Celda 3 → texto
-Celda 4 → gráfico
-```
-
-Muy útil para exploración, experimentación y comunicación de análisis.
-
-</div>
-
-<div class="mini-card" markdown="1">
-
-### 🧰 IDE / Editor avanzado
-
-Integra edición, navegación, terminal, extensiones y herramientas de depuración.
-
-</div>
-
-</div>
-
-### Anatomía conceptual de un proyecto
-
-```text
-my-data-project/
-├── data/          ← datos
-├── notebooks/     ← exploración
-├── src/           ← código reutilizable
-├── outputs/       ← resultados
-└── README.md      ← documentación
-```
-
-No todos los proyectos comienzan con esta estructura, pero separar **datos, exploración, código y resultados** ayuda a mantener el trabajo organizado.
-
----
-
-## 4. Tu primer contacto con Python
-
-### 4.1. Ejecutar una instrucción
+Una variable permite asignar un nombre a un dato.
 
 ```python
-print("Hello, Data Science!")
-```
-
-`print()` muestra información en la salida.
-
-```text
-┌────────────────────────┐
-│ Hello, Data Science!    │
-└────────────────────────┘
-```
-
-### 4.2. Variables
-
-Una variable asocia un nombre con un valor.
-
-```python
-customer = "Laura"
-age = 31
-purchase = 520000.0
-active = True
+nombre = "Ana"
+edad = 30
+altura = 1.65
 ```
 
 Visualmente:
 
 ```text
-┌──────────┐      ┌────────────┐
-│ customer │ ───▶ │ "Laura"    │
-└──────────┘      └────────────┘
-
-┌──────────┐      ┌────────────┐
-│ age      │ ───▶ │ 31         │
-└──────────┘      └────────────┘
-
-┌──────────┐      ┌────────────┐
-│ purchase │ ───▶ │ 520000.0   │
-└──────────┘      └────────────┘
+nombre ─────────► "Ana"
+edad   ─────────► 30
+altura ─────────► 1.65
 ```
 
-El símbolo `=` realiza una **asignación**: el nombre de la izquierda referencia el valor de la derecha.
+El símbolo `=` representa **asignación**.
 
-### Reglas prácticas para nombres
+```text
+nombre_variable = valor
+```
+
+La variable puede reutilizarse:
 
 ```python
-customer_name = "Laura"      # válido
-purchase_total = 520000      # válido
+print(nombre)
+print(edad)
+print(altura)
 ```
 
-Evita nombres sin significado:
+### 2.1 Tipos de datos básicos
 
-```python
-x = "Laura"
-y = 520000
-```
+Python distingue valores según su tipo.
 
-Cuando el programa crece, nombres descriptivos reducen ambigüedad.
-
----
-
-## 5. Tipos de datos básicos
-
-El tipo describe la naturaleza de un valor y determina qué operaciones tienen sentido sobre él.
-
-| Tipo | Ejemplo | Representa |
+| Tipo | Significado | Ejemplos |
 |---|---|---|
-| `str` | `"Tunja"` | Texto |
-| `int` | `31` | Número entero |
-| `float` | `520000.0` | Número con parte decimal |
-| `bool` | `True` | Valor lógico verdadero/falso |
-| `NoneType` | `None` | Ausencia de valor |
-
-### Mapa visual
+| `int` | número entero | `5`, `-3`, `100` |
+| `float` | número decimal | `3.14`, `1.65` |
+| `str` | texto | `"Hola"`, `"30"` |
+| `bool` | valor lógico | `True`, `False` |
 
 ```mermaid
 flowchart LR
-    D[DATO] --> S["str · texto"]
-    D --> I["int · entero"]
-    D --> F["float · decimal"]
-    D --> B["bool · lógico"]
-    D --> N["None · ausencia"]
+    A[Valor] --> B{Tipo}
+    B --> C[int<br/>entero]
+    B --> D[float<br/>decimal]
+    B --> E[str<br/>texto]
+    B --> F[bool<br/>lógico]
 ```
 
-### Consultar el tipo con `type()`
+`type()` permite inspeccionar el tipo de un valor.
 
 ```python
-customer = "Laura"
-age = 31
-purchase = 520000.0
-active = True
-
-print(type(customer))
-print(type(age))
-print(type(purchase))
-print(type(active))
+print(type(30))
+print(type("30"))
 ```
 
-Una salida posible es:
+Aunque visualmente se parezcan, `30` y `"30"` no representan lo mismo:
 
 ```text
-<class 'str'>
-<class 'int'>
-<class 'float'>
-<class 'bool'>
+30       → int → número
+"30"     → str → texto
 ```
 
-### El valor puede parecer igual y ser distinto
-
-```python
-age_number = 31
-age_text = "31"
-```
-
-```text
-31      → número → puede sumarse numéricamente
-"31"    → texto  → representa caracteres
-```
-
-```python
-print(age_number + 5)
-```
-
-```text
-36
-```
-
-Pero:
-
-```python
-print(age_text + 5)
-```
-
-produce un error porque se intenta combinar texto y número mediante una operación no válida.
+El tipo determina qué operaciones son válidas.
 
 ---
 
-## 6. Operadores: transformar y comparar
+## 3. Operadores: Python como calculadora
 
-Los operadores permiten construir expresiones.
-
-### 6.1. Operadores aritméticos
+Los operadores aritméticos permiten construir expresiones numéricas.
 
 | Operador | Operación | Ejemplo |
-|:---:|---|---|
-| `+` | suma | `10 + 5` |
-| `-` | resta | `10 - 5` |
-| `*` | multiplicación | `10 * 5` |
-| `/` | división | `10 / 5` |
-| `//` | división entera | `11 // 5` |
-| `%` | residuo | `11 % 5` |
-| `**` | potencia | `2 ** 3` |
-
-### 6.2. Operadores de comparación
-
-Una comparación produce `True` o `False`.
+|---|---|---|
+| `+` | suma | `10 + 3` |
+| `-` | resta | `10 - 3` |
+| `*` | multiplicación | `10 * 3` |
+| `/` | división | `10 / 3` |
+| `//` | división entera | `10 // 3` |
+| `%` | residuo | `10 % 3` |
+| `**` | potencia | `10 ** 2` |
 
 ```python
-purchase = 1250000
+a = 10
+b = 3
 
-print(purchase > 1000000)
-print(purchase == 1250000)
-print(purchase < 500000)
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a // b)
+print(a ** 2)
+print(a % b)
+```
+
+### 3.1 Operaciones con texto
+
+En cadenas de texto, algunos operadores tienen otro comportamiento.
+
+```python
+nombre = "Ana"
+apellido = "García"
+
+completo = nombre + " " + apellido
+print(completo)
+
+print("Hola! " * 3)
 ```
 
 ```text
-True
-True
-False
+"Data" + " Science"  → "Data Science"
+"Hi! " * 3           → "Hi! Hi! Hi! "
 ```
 
-| Operador | Significado |
-|:---:|---|
-| `>` | mayor que |
-| `<` | menor que |
-| `>=` | mayor o igual |
-| `<=` | menor o igual |
-| `==` | igual a |
-| `!=` | diferente de |
+### Tipos incompatibles
 
-<div class="callout callout-warning" markdown="1">
-
-### `=` no es lo mismo que `==`
+No todas las operaciones tienen sentido entre tipos diferentes.
 
 ```python
-purchase = 520000       # asignación
-purchase == 520000      # comparación
+edad = 30
+print("Tengo " + edad + " años")
 ```
 
-</div>
+El programa produce un `TypeError` porque intenta concatenar un `str` con un `int`.
+
+Una solución es convertir el número:
+
+```python
+print("Tengo " + str(edad) + " años")
+```
+
+Otra opción más legible son las **f-strings**.
 
 ---
 
-## 7. Tomar decisiones con `if`
+## 4. f-strings: combinar texto y variables
 
-Muchos problemas de datos incluyen reglas.
+Una f-string permite insertar expresiones dentro de un texto.
 
-> Si una compra supera $1.000.000, clasificarla como compra alta.
+```python
+nombre = "Ana"
+edad = 30
 
-La lógica puede representarse antes de escribir código:
+print(f"{nombre} tiene {edad} años")
+```
+
+La estructura es:
+
+```text
+f"texto {expresión} texto"
+```
+
+También permite formatear números.
+
+```python
+precio = 1_250_000
+print(f"El total es ${precio:,}")
+
+promedio = 4.23456
+print(f"Promedio: {promedio:.2f}")
+
+descuento = 0.15
+print(f"Descuento: {descuento:.0%}")
+```
+
+| Formato | Efecto |
+|---|---|
+| `:,` | separador de miles |
+| `:.2f` | dos cifras decimales |
+| `:.0%` | porcentaje sin decimales |
+
+---
+
+## 5. Decisiones con `if`, `elif` y `else`
+
+Un programa puede escoger caminos diferentes según una condición.
 
 ```mermaid
 flowchart TD
-    A[Leer purchase] --> B{purchase > 1.000.000?}
-    B -- Sí --> C[Compra alta]
-    B -- No --> D[Compra regular]
+    A[Evaluar condición] --> B{¿Se cumple?}
+    B -- Sí --> C[Ejecutar bloque if]
+    B -- No --> D[Evaluar siguiente alternativa]
+    D --> E{¿Se cumple?}
+    E -- Sí --> F[Ejecutar bloque elif]
+    E -- No --> G[Ejecutar bloque else]
 ```
 
-En Python:
+### Operadores de comparación
+
+| Operador | Significado |
+|---|---|
+| `==` | igual a |
+| `!=` | diferente de |
+| `>` | mayor que |
+| `<` | menor que |
+| `>=` | mayor o igual que |
+| `<=` | menor o igual que |
+
+Ejemplo:
 
 ```python
-purchase = 1250000
+edad = 20
 
-if purchase > 1000000:
-    print("High purchase")
+if edad >= 18:
+    print("Es mayor de edad")
 else:
-    print("Regular purchase")
+    print("Es menor de edad")
 ```
 
-### Más de dos posibilidades
+Con varias alternativas:
 
 ```python
-purchase = 750000
+edad = 15
 
-if purchase < 500000:
-    category = "Low"
-elif purchase <= 1000000:
-    category = "Medium"
+if edad >= 18:
+    print("Puede votar")
+elif edad >= 13:
+    print("Es adolescente")
 else:
-    category = "High"
-
-print(category)
+    print("Es niño o niña")
 ```
+
+### 5.1 La indentación es parte de la sintaxis
+
+Python utiliza sangría para indicar qué instrucciones pertenecen a cada bloque.
 
 ```text
-Medium
+if condición:
+│   instrucción dentro del if
+│   otra instrucción
+│
+└── termina el bloque al volver al margen
 ```
 
-### La indentación importa
-
-Python utiliza la indentación para indicar qué instrucciones pertenecen a un bloque.
+Ejemplo correcto:
 
 ```python
-if purchase > 1000000:
-    print("High purchase")
-    print("Review this transaction")
+if edad >= 18:
+    print("Puede votar")
 ```
 
-Las dos instrucciones indentadas pertenecen al `if`.
+Ejemplo incorrecto:
+
+```python
+if edad >= 18:
+print("Puede votar")
+```
+
+La falta de indentación genera un `IndentationError`.
 
 ---
 
-## 8. Funciones: convertir una solución en algo reutilizable
+## 6. Repetición: `for` y `while`
 
-Si necesitamos clasificar cientos o miles de compras, copiar el mismo bloque una y otra vez no es una buena estrategia.
+Muchas tareas de datos requieren repetir una operación.
 
-Una función encapsula una operación reutilizable.
+```text
+dato 1 ─┐
+dato 2 ─┼──► misma operación ───► resultados
+dato 3 ─┤
+dato 4 ─┘
+```
+
+### 6.1 `for`: recorrer una secuencia
+
+`for` es apropiado cuando queremos recorrer elementos de una colección o un rango.
+
+```python
+for numero in range(1, 6):
+    print(numero)
+```
+
+### `range()`
+
+| Expresión | Valores producidos |
+|---|---|
+| `range(5)` | `0, 1, 2, 3, 4` |
+| `range(1, 6)` | `1, 2, 3, 4, 5` |
+| `range(0, 10, 2)` | `0, 2, 4, 6, 8` |
+
+También podemos recorrer una colección:
+
+```python
+amigos = ["Ana", "Luis", "Sofía"]
+
+for amigo in amigos:
+    print(f"Hola, {amigo}!")
+```
+
+```mermaid
+flowchart TD
+    A[Inicio] --> B[Tomar siguiente elemento]
+    B --> C[Ejecutar bloque]
+    C --> D{¿Quedan elementos?}
+    D -- Sí --> B
+    D -- No --> E[Fin]
+```
+
+### 6.2 `while`: repetir mientras una condición sea verdadera
+
+```python
+saldo = 1000
+
+while saldo > 0:
+    print(f"Saldo actual: {saldo}")
+    saldo = saldo - 300
+
+print("Saldo agotado")
+```
+
+```mermaid
+flowchart TD
+    A[Inicio] --> B{¿Condición verdadera?}
+    B -- Sí --> C[Ejecutar bloque]
+    C --> D[Actualizar estado]
+    D --> B
+    B -- No --> E[Fin]
+```
+
+La condición debe poder cambiar. Si nunca se vuelve falsa, se produce un **bucle infinito**.
+
+---
+
+## 7. Listas: colecciones ordenadas y modificables
+
+Una lista agrupa varios valores.
+
+```python
+productos = ["Café", "Pan", "Leche", "Queso"]
+```
+
+### Índices
+
+Python comienza a contar desde `0`.
+
+```text
+índice        0        1         2         3
+          ┌────────┬────────┬─────────┬─────────┐
+lista  →  │ "Café" │ "Pan"  │ "Leche" │ "Queso" │
+          └────────┴────────┴─────────┴─────────┘
+                                         ▲
+                                        -1
+```
+
+```python
+print(productos[0])
+print(productos[2])
+print(productos[-1])
+```
+
+`len()` devuelve la cantidad de elementos:
+
+```python
+print(len(productos))
+```
+
+### 7.1 Modificar listas
+
+| Operación | Efecto |
+|---|---|
+| `lista.append(x)` | agrega `x` al final |
+| `lista.remove(x)` | elimina la primera aparición |
+| `lista[i] = x` | reemplaza un elemento |
+| `sum(lista)` | suma elementos numéricos |
+| `max(lista)` | obtiene el mayor |
+| `min(lista)` | obtiene el menor |
+| `sorted(lista)` | devuelve una versión ordenada |
+
+```python
+precios = [3500, 1200, 4800, 12000]
+
+precios.append(2000)
+precios[0] = 4000
+
+print(sum(precios))
+print(max(precios))
+print(sum(precios) / len(precios))
+```
+
+---
+
+## 8. Tuplas: datos agrupados que no se modifican
+
+Una tupla es una secuencia ordenada similar a una lista, pero **inmutable**.
+
+```python
+punto = (4.5, 3.2)
+producto = ("Café", 3500)
+```
+
+```text
+LISTA                    TUPLA
+[ "Café", "Pan" ]        ( "Café", 3500 )
+      │                         │
+ modificable               inmutable
+```
+
+### Listas y tuplas
+
+| Característica | Lista | Tupla |
+|---|---|---|
+| Sintaxis | `[ ]` | `( )` |
+| Ordenada | Sí | Sí |
+| Acceso por índice | Sí | Sí |
+| Modificable | Sí | No |
+| Uso típico | colección que cambia | registro pequeño y estable |
+
+Las tuplas son útiles para agrupar valores relacionados:
+
+```python
+catalogo = [
+    ("Café", 3500),
+    ("Pan", 1200),
+    ("Leche", 4800)
+]
+```
+
+Python permite desempaquetar cada tupla:
+
+```python
+for nombre_producto, precio in catalogo:
+    print(f"{nombre_producto}: ${precio:,}")
+```
+
+---
+
+## 9. Diccionarios: asociar claves con valores
+
+Un diccionario organiza datos como pares **clave: valor**.
+
+```python
+precios = {
+    "Café": 3500,
+    "Pan": 1200,
+    "Leche": 4800
+}
+```
+
+```text
+┌─────────────┬─────────┐
+│ clave       │ valor   │
+├─────────────┼─────────┤
+│ "Café"      │ 3500    │
+│ "Pan"       │ 1200    │
+│ "Leche"     │ 4800    │
+└─────────────┴─────────┘
+```
+
+A diferencia de una lista, no buscamos por posición:
+
+```python
+print(precios["Café"])
+```
+
+Podemos agregar nuevas claves:
+
+```python
+precios["Huevos"] = 900
+```
+
+### 9.1 Recorrer un diccionario
+
+```python
+for producto, precio in precios.items():
+    print(f"{producto}: ${precio:,}")
+```
+
+Métodos útiles:
+
+| Expresión | Resultado |
+|---|---|
+| `diccionario.keys()` | claves |
+| `diccionario.values()` | valores |
+| `diccionario.items()` | pares clave-valor |
+
+### 9.2 Claves inexistentes: `KeyError` y `.get()`
+
+Esto falla si la clave no existe:
+
+```python
+precios["Arroz"]
+```
+
+Produce un `KeyError`.
+
+`.get()` permite indicar un valor alternativo:
+
+```python
+precios.get("Arroz", 0)
+```
+
+También se puede verificar pertenencia:
+
+```python
+if "Arroz" in precios:
+    print("Sí hay arroz")
+else:
+    print("No tenemos arroz")
+```
+
+---
+
+## 10. Estructuras anidadas
+
+Las estructuras pueden combinarse.
+
+```python
+supermercado = {
+    "Frutas": [
+        ("Manzana", 4500),
+        ("Banano", 2800)
+    ],
+    "Lácteos": [
+        ("Leche", 4800),
+        ("Queso", 12000),
+        ("Yogur", 3200)
+    ]
+}
+```
+
+Su forma conceptual es:
+
+```text
+supermercado
+│
+├── "Frutas"
+│   ├── ("Manzana", 4500)
+│   └── ("Banano", 2800)
+│
+└── "Lácteos"
+    ├── ("Leche", 4800)
+    ├── ("Queso", 12000)
+    └── ("Yogur", 3200)
+```
+
+También puede verse como:
+
+```mermaid
+flowchart TD
+    A[supermercado] --> B[Frutas]
+    A --> C[Lácteos]
+    B --> D[Manzana, 4500]
+    B --> E[Banano, 2800]
+    C --> F[Leche, 4800]
+    C --> G[Queso, 12000]
+    C --> H[Yogur, 3200]
+```
+
+Acceder a estructuras anidadas significa avanzar nivel por nivel:
+
+```python
+supermercado["Lácteos"][0]
+supermercado["Lácteos"][0][0]
+```
+
+```text
+supermercado["Lácteos"]       → lista
+          [0]                 → primera tupla
+             [0]              → nombre del producto
+```
+
+---
+
+## 11. Funciones: empaquetar trabajo reutilizable
+
+Una función agrupa instrucciones bajo un nombre.
+
+```python
+def saludar(nombre):
+    mensaje = f"Hola, {nombre}!"
+    return mensaje
+```
+
+La estructura general es:
+
+```python
+def nombre_funcion(parametro1, parametro2):
+    # instrucciones
+    return resultado
+```
 
 ```mermaid
 flowchart LR
-    I[Entrada] --> F[Función]
-    F --> P[Proceso]
-    P --> O[Salida]
+    A[Argumentos] --> B[Función]
+    B --> C[Procesamiento]
+    C --> D[return]
+    D --> E[Resultado reutilizable]
 ```
 
-### Ejemplo
+Definir una función no significa ejecutarla:
 
 ```python
-def classify_purchase(value):
-    if value < 500000:
-        return "Low"
-    elif value <= 1000000:
-        return "Medium"
-    else:
-        return "High"
+def saludar(nombre):
+    return f"Hola, {nombre}!"
+
+mensaje = saludar("Ana")
 ```
 
-Ahora podemos reutilizarla:
+### 11.1 Parámetros y argumentos
+
+```text
+def saludar(nombre):
+            ▲
+            └── parámetro
+
+saludar("Ana")
+         ▲
+         └── argumento
+```
+
+### 11.2 `return` no es lo mismo que `print()`
+
+Esta diferencia es fundamental.
 
 ```python
-print(classify_purchase(350000))
-print(classify_purchase(750000))
-print(classify_purchase(1250000))
+def sumar_mal(a, b):
+    print(a + b)
+
+def sumar_bien(a, b):
+    return a + b
 ```
 
+`print()`:
+
 ```text
-Low
-Medium
-High
+función
+  │
+  └── muestra 5 en pantalla
+         │
+         └── no devuelve ese 5 al programa
 ```
 
-### Anatomía de una función
+`return`:
 
 ```text
-def classify_purchase(value):
-│   │                 │
-│   │                 └── parámetro / entrada
-│   └──────────────────── nombre de la función
-└──────────────────────── define una función
-
-return "High"
-  └────────── valor que la función devuelve
+función
+  │
+  └── devuelve 5
+         │
+         ├── guardarlo
+         ├── multiplicarlo
+         ├── compararlo
+         └── pasarlo a otra función
 ```
 
-La idea importante no es memorizar `def`. La idea es pasar de:
+Si una función no utiliza `return`, Python devuelve implícitamente `None`.
 
-```text
-"resolver este caso"
-```
-
-a:
-
-```text
-"construir una solución que pueda volver a usarse"
+```python
+resultado = sumar_mal(2, 3)
+print(resultado)
+# None
 ```
 
 ---
 
-## 9. El error también contiene información
+## 12. Combinar conceptos: de piezas aisladas a un programa
 
-En programación, un error no significa automáticamente que la idea completa sea incorrecta. Muchas veces indica que existe una diferencia entre lo que el código **espera** y lo que realmente **recibió**.
+Los programas reales combinan varias estructuras y mecanismos.
 
-### Ejemplo
+```text
+DICCIONARIO
+     │
+     ▼
+categorías
+     │
+     ▼
+LISTAS
+     │
+     ▼
+TUPLAS (producto, precio)
+     │
+     ▼
+FOR recorre
+     │
+     ▼
+IF decide
+     │
+     ▼
+FUNCIONES calculan
+     │
+     ▼
+F-STRINGS presentan
+```
+
+Ejemplo conceptual de una cafetería:
+
+```mermaid
+flowchart TD
+    A[Diccionario cafeteria] --> B[Categoría]
+    B --> C[Lista de productos]
+    C --> D[Tupla nombre, precio]
+    D --> E{¿Tiene descuento?}
+    E -- Sí --> F[Función aplicar_descuento]
+    E -- No --> G[Conservar precio]
+    F --> H[Función clasificar]
+    G --> H
+    H --> I[Mostrar resultado]
+```
+
+Una función para aplicar descuento:
 
 ```python
-age = "31"
-print(age + 5)
+def aplicar_descuento(precio, porcentaje):
+    return precio * (1 - porcentaje)
 ```
 
-Una versión resumida del mensaje puede verse así:
+Una función para clasificar:
 
-```text
-TypeError
-can only concatenate str ...
+```python
+def clasificar(precio):
+    if precio > 5000:
+        return "caro"
+    else:
+        return "barato"
 ```
 
-Podemos leerlo como una pista:
+El valor de estas piezas no está en cada línea aislada, sino en que pueden **componerse**.
 
-```text
-ERROR
-  │
-  ├── ¿Dónde ocurrió?
-  ├── ¿Qué operación intenté realizar?
-  ├── ¿Qué valores participaron?
-  └── ¿Qué tipos tenían esos valores?
-```
+---
 
-### Tres categorías útiles
+## 13. Del notebook al archivo `.py`
 
-| Tipo de problema | Qué ocurre | Ejemplo |
-|---|---|---|
-| **Sintaxis** | El código no respeta la estructura del lenguaje | falta `:` después de un `if` |
-| **Ejecución** | El código comienza, pero una operación falla | sumar `str` + `int` |
-| **Lógica** | El programa corre, pero produce un resultado incorrecto | usar un umbral equivocado |
+Un notebook (`.ipynb`) y un script (`.py`) contienen código Python, pero se utilizan de manera diferente.
 
-<div class="callout callout-success" markdown="1">
+<div class="concept-grid" markdown="1">
 
-### Estrategia de depuración inicial
+<div class="concept-card" markdown="1">
 
-```text
-1. Leer el mensaje
-2. Identificar la línea
-3. Revisar los valores
-4. Consultar sus tipos
-5. Cambiar una cosa
-6. Ejecutar de nuevo
-```
+### Notebook `.ipynb`
+
+- organizado en celdas;
+- combina texto, código y resultados;
+- ideal para experimentar y documentar;
+- muy común en análisis exploratorio.
 
 </div>
 
----
+<div class="concept-card" markdown="1">
 
-## 10. Reto progresivo: un mismo concepto, diferentes profundidades
+### Script `.py`
 
-Los retos están organizados para que puedas continuar profundizando cuando completes un nivel.
+- archivo de texto con código Python;
+- pensado para ejecutar un flujo como programa;
+- facilita reutilización, automatización y organización.
 
-```text
-🟢 Nivel 1 ──▶ 🟡 Nivel 2 ──▶ 🔴 Nivel 3
-   aplicar         adaptar         generalizar
-```
+</div>
 
-### 🟢 Nivel 1 · Representar una transacción
-
-Crea variables para representar:
+</div>
 
 ```text
-customer
-age
-city
-purchase
-active
+NOTEBOOK                     SCRIPT
+analysis.ipynb               inventario.py
+┌───────────────┐            ┌───────────────┐
+│ texto         │            │ código         │
+│ código        │    →       │ funciones      │
+│ resultado     │            │ flujo          │
+│ gráfico       │            │ reutilizable   │
+└───────────────┘            └───────────────┘
 ```
 
-Muestra el valor y el tipo de cada variable.
+### `if __name__ == "__main__"`
 
-<details>
-<summary>💡 Pista</summary>
-
-Puedes combinar `print()` y `type()`.
+En un script puede aparecer:
 
 ```python
-print(customer, type(customer))
+if __name__ == "__main__":
+    print("Ejecutando programa")
 ```
 
-</details>
-
-<details>
-<summary>✅ Una posible solución</summary>
-
-```python
-customer = "Laura"
-age = 31
-city = "Tunja"
-purchase = 520000.0
-active = True
-
-print(customer, type(customer))
-print(age, type(age))
-print(city, type(city))
-print(purchase, type(purchase))
-print(active, type(active))
-```
-
-</details>
-
----
-
-### 🟡 Nivel 2 · Clasificar una compra
-
-Construye una solución que clasifique un valor con estas reglas:
+Este bloque permite distinguir entre:
 
 ```text
-purchase < 500000             → Low
-500000 <= purchase <= 1000000 → Medium
-purchase > 1000000            → High
+ejecutar archivo directamente
+            vs.
+importar sus funciones desde otro archivo
 ```
-
-<details>
-<summary>💡 Pista</summary>
-
-Piensa en `if`, `elif` y `else`.
-
-</details>
-
-<details>
-<summary>✅ Una posible solución</summary>
-
-```python
-purchase = 750000
-
-if purchase < 500000:
-    category = "Low"
-elif purchase <= 1000000:
-    category = "Medium"
-else:
-    category = "High"
-
-print(category)
-```
-
-</details>
 
 ---
 
-### 🔴 Nivel 3 · Generalizar la solución
+## 14. Errores frecuentes y cómo leerlos
 
-Convierte la clasificación anterior en una función reutilizable.
-
-Requisitos:
-
-- recibe un valor como entrada;
-- devuelve `Low`, `Medium` o `High`;
-- puede utilizarse con diferentes compras sin reescribir toda la lógica.
-
-<details>
-<summary>💡 Pista</summary>
-
-La estructura puede comenzar así:
-
-```python
-def classify_purchase(value):
-    ...
-```
-
-</details>
-
-<details>
-<summary>✅ Una posible solución</summary>
-
-```python
-def classify_purchase(value):
-    if value < 500000:
-        return "Low"
-    elif value <= 1000000:
-        return "Medium"
-    else:
-        return "High"
-
-print(classify_purchase(350000))
-print(classify_purchase(750000))
-print(classify_purchase(1250000))
-```
-
-</details>
-
----
-
-### 🔴+ Extensión · Hacerla más robusta
-
-¿Qué debería ocurrir si recibimos esto?
-
-```python
-classify_purchase(None)
-classify_purchase("750000")
-classify_purchase(-50)
-```
-
-Piensa antes de programar:
+Un traceback contiene información para localizar un problema.
 
 ```text
-¿Qué entradas considero válidas?
-        ↓
-¿Cómo detecto una entrada inválida?
-        ↓
-¿Qué debería devolver mi función?
+TRACEBACK
+│
+├── archivo / celda
+├── línea
+├── tipo de error
+└── mensaje
 ```
 
-No existe una única decisión correcta: importa que la regla sea explícita y consistente.
+### Errores trabajados en esta sesión
 
----
+| Error | Significado habitual |
+|---|---|
+| `TypeError` | se intentó una operación entre tipos incompatibles |
+| `IndentationError` | la sangría no representa correctamente el bloque |
+| `IndexError` | se solicitó una posición inexistente |
+| `KeyError` | se solicitó una clave inexistente |
+| problema con `NoneType` | se intentó operar con un valor `None` |
 
-## 11. De una solución puntual a una solución reutilizable
-
-Observa la progresión:
+### Estrategia básica de depuración
 
 ```mermaid
-flowchart LR
-    A[Valor] --> B[Variable]
-    B --> C[Tipo]
-    C --> D[Comparación]
-    D --> E[Decisión]
-    E --> F[Función]
-    F --> G[Solución reutilizable]
+flowchart TD
+    A[El programa falla] --> B[Leer última línea del traceback]
+    B --> C[Identificar tipo de error]
+    C --> D[Localizar la línea]
+    D --> E[Revisar valores y tipos]
+    E --> F[Formular hipótesis]
+    F --> G[Modificar una cosa]
+    G --> H[Ejecutar de nuevo]
+    H --> I{¿Se resolvió?}
+    I -- No --> B
+    I -- Sí --> J[Comprender la causa]
 ```
 
-El aprendizaje de programación suele crecer de esta manera:
+> Un error no solo dice que algo falló: aporta evidencia sobre el estado del programa.
 
-```text
-RECONOCER
-"entiendo qué hace"
-    ↓
-APLICAR
-"puedo repetirlo"
-    ↓
-ADAPTAR
-"puedo cambiarlo"
-    ↓
-GENERALIZAR
-"puedo convertirlo en una solución reutilizable"
+---
+
+## 15. Mapa conceptual de la sesión
+
+```mermaid
+flowchart TD
+    A[Python básico] --> B[print]
+    A --> C[Variables]
+    C --> D[Tipos]
+    D --> E[Operadores]
+    E --> F[f-strings]
+    A --> G[Control de flujo]
+    G --> H[if / elif / else]
+    G --> I[for]
+    G --> J[while]
+    A --> K[Estructuras]
+    K --> L[Listas]
+    K --> M[Tuplas]
+    K --> N[Diccionarios]
+    N --> O[Estructuras anidadas]
+    A --> P[Funciones]
+    P --> Q[Parámetros]
+    P --> R[return]
+    A --> S[Depuración]
+    S --> T[Tracebacks y errores]
 ```
 
 ---
 
-## 12. Preguntas para discutir soluciones
-
-Cuando dos programas producen el mismo resultado, todavía podemos compararlos.
-
-- ¿Qué supuestos hace cada solución?
-- ¿Qué ocurre con entradas inesperadas?
-- ¿Qué tan fácil sería reutilizarla?
-- ¿Qué tan sencillo es entenderla al volver a verla una semana después?
-- ¿Qué parte está escrita específicamente para un caso y cuál es general?
-- ¿Qué cambiaría si tuviéramos 10 registros? ¿Y 10 millones?
-
-> **Código que funciona** y **código bien diseñado** no siempre significan lo mismo.
-
----
-
-## 13. Cheat sheet de la sesión
+## 16. Hoja rápida de referencia
 
 ```python
-# Mostrar un valor
-print("Data Science")
+# Mostrar
+print("Hola")
 
 # Variables
-customer = "Laura"
-age = 31
-purchase = 520000.0
-active = True
+edad = 30
+nombre = "Ana"
 
-# Consultar un tipo
-type(customer)
-type(age)
+# Tipo
+type(edad)
 
-# Comparaciones
-purchase > 1000000
-purchase == 520000
-purchase != 0
+# f-string
+print(f"{nombre} tiene {edad} años")
 
-# Decisiones
-if purchase < 500000:
-    category = "Low"
-elif purchase <= 1000000:
-    category = "Medium"
+# Decisión
+if edad >= 18:
+    print("Mayor de edad")
 else:
-    category = "High"
+    print("Menor de edad")
+
+# for
+for numero in range(5):
+    print(numero)
+
+# while
+saldo = 3
+while saldo > 0:
+    saldo -= 1
+
+# Lista
+productos = ["Café", "Pan"]
+productos.append("Leche")
+
+# Tupla
+producto = ("Café", 3500)
+
+# Diccionario
+precios = {"Café": 3500}
+precio = precios.get("Café", 0)
 
 # Función
-def classify_purchase(value):
-    if value < 500000:
-        return "Low"
-    elif value <= 1000000:
-        return "Medium"
-    return "High"
+def doble(numero):
+    return numero * 2
 ```
 
 ---
 
-## 14. Autoevaluación rápida
+## 17. Comprueba tu comprensión
 
-Marca mentalmente cuál descripción se parece más a tu estado actual:
+### Nivel 1 — Reconocer y aplicar
 
-<div class="level-grid" markdown="1">
-
-<div class="level-card level-green" markdown="1">
-
-### 🟢 Base
-
-Puedo crear variables, reconocer sus tipos y ejecutar ejemplos con apoyo.
-
-</div>
-
-<div class="level-card level-yellow" markdown="1">
-
-### 🟡 Aplicación
-
-Puedo utilizar condiciones para resolver un problema parecido por mi cuenta.
-
-</div>
-
-<div class="level-card level-red" markdown="1">
-
-### 🔴 Profundización
-
-Puedo generalizar la lógica en funciones y pensar en casos inesperados.
-
-</div>
-
-</div>
-
-### Comprueba tu comprensión
-
-1. ¿Por qué `31` y `"31"` no son equivalentes para Python?
+1. ¿Por qué `30` y `"30"` tienen comportamientos distintos?
 2. ¿Qué diferencia existe entre `=` y `==`?
-3. ¿Por qué una función mejora la reutilización del código?
-4. ¿Qué información buscarías primero al encontrar un `TypeError`?
-5. ¿Qué parte de un problema de Ciencia de Datos ocurre antes de escribir código?
+3. ¿Por qué Python necesita indentación en un `if`?
+4. ¿Cuándo usarías `for` y cuándo `while`?
 
-<details>
-<summary>Ver respuestas breves</summary>
+### Nivel 2 — Comparar
 
-1. Porque tienen tipos distintos: `int` y `str`.
-2. `=` asigna; `==` compara.
-3. Encapsula una operación para ejecutarla con diferentes entradas.
-4. La línea del error, la operación y los tipos de los valores involucrados.
-5. Comprender la pregunta, los datos y la lógica necesaria para resolverla.
+1. ¿Qué diferencia práctica existe entre una lista y una tupla?
+2. ¿Por qué un diccionario permite modelar mejor algunos datos que una lista?
+3. ¿Por qué `.get()` puede ser más seguro que `diccionario[clave]`?
+4. ¿Qué diferencia funcional existe entre `print()` y `return`?
 
-</details>
+### Nivel 3 — Diseñar
 
----
-
-## 15. Cómo conecta esta sesión con el resto del curso
-
-Lo que hoy aparece como valores individuales crecerá progresivamente:
-
-```mermaid
-flowchart LR
-    S1["S1 · Variables y tipos"] --> S2["S2 · Estructuras de datos"]
-    S2 --> S3["S3 · NumPy"]
-    S3 --> S4["S4 · Pandas / Polars"]
-    S4 --> S5["S5 · Carga y limpieza"]
-    S5 --> S6["S6 · Visualización y EDA"]
-    S6 --> S7["S7 · Código avanzado y reutilizable"]
-```
+Imagina una tienda con categorías y productos.
 
 ```text
-HOY
-un valor
-  ↓
-lista / diccionario
-  ↓
-array
-  ↓
-DataFrame
-  ↓
-dataset real
-  ↓
-análisis
-  ↓
-solución reutilizable
+tienda
+│
+├── Bebidas
+│   ├── ("Café", 3500)
+│   └── ("Jugo", 5000)
+│
+└── Panadería
+    ├── ("Pan", 1200)
+    └── ("Croissant", 4500)
 ```
 
+Piensa qué combinación de:
+
+- diccionario;
+- listas;
+- tuplas;
+- ciclos;
+- condicionales;
+- funciones;
+
+usarías para calcular precios promedio, aplicar descuentos y clasificar productos.
+
 ---
 
-## 16. Referencias recomendadas
+## 18. Ejercicios de refuerzo
 
-- VanderPlas, J. (2022). *Python Data Science Handbook: Essential Tools for Working with Data* (2nd ed.).
-- McKinney, W. (2022). *Python for Data Analysis: Data Wrangling with pandas, NumPy, and Jupyter* (3rd ed.).
-- Guttag, J. V. (2021). *Introduction to Computation and Programming Using Python: With Application to Computational Modeling and Understanding Data* (3rd ed.).
-- Vohra, M. (2021). *Jupyter for Data Science: Exploratory Analysis, Statistical Modeling, Machine Learning, and Data Visualization*.
+### 🟢 Ejercicio 1
+
+Crea una lista de cinco precios y calcula:
+
+- total;
+- promedio;
+- mayor;
+- menor.
+
+Pistas:
+
+```python
+sum()
+len()
+max()
+min()
+```
+
+### 🟡 Ejercicio 2
+
+Escribe una función:
+
+```python
+contar_pares(lista)
+```
+
+que devuelva cuántos números pares contiene una lista.
+
+Recuerda:
+
+```python
+numero % 2 == 0
+```
+
+### 🔴 Ejercicio 3
+
+Dado un diccionario de categorías con productos y precios, construye:
+
+```python
+categoria_mas_cara()
+```
+
+que devuelva la categoría cuyo precio promedio sea mayor.
 
 ---
 
-<div class="final-banner" markdown="1">
+## 19. Qué debes poder explicar al finalizar
 
-## 🧠 Idea para llevarte
+- qué es una variable y cómo se relaciona con un tipo de dato;
+- por qué el tipo afecta las operaciones disponibles;
+- cómo una condición permite elegir un camino;
+- cómo `for` y `while` permiten repetir;
+- cómo listas, tuplas y diccionarios representan información de formas distintas;
+- cómo combinar estructuras para modelar datos más complejos;
+- por qué una función permite reutilizar una solución;
+- por qué `return` y `print()` no son equivalentes;
+- cómo utilizar un traceback como fuente de información;
+- qué diferencia conceptual existe entre trabajar en un notebook y en un archivo `.py`.
+
+---
+
+## Próxima sesión
+
+La siguiente sesión lleva estas ideas hacia **NumPy** y la computación numérica: representar los mismos datos con estructuras diseñadas para realizar operaciones numéricas de forma más eficiente.
 
 ```text
-No necesito saber todo Python para empezar.
-Necesito comprender el problema,
-representar los datos,
-probar una idea,
-leer el resultado
-y mejorar la solución.
+Python básico
+     │
+     ▼
+listas y estructuras
+     │
+     ▼
+NumPy arrays
+     │
+     ▼
+operaciones numéricas sobre datos
 ```
-
-</div>
