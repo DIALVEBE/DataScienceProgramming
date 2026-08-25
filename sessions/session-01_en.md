@@ -1078,6 +1078,307 @@ that returns the category with the highest average price.
 
 ---
 
+## 20. Installing Python, VS Code, and Jupyter
+
+This section helps you prepare a local environment for working with notebooks on Windows, Linux, or macOS. The recommended workflow is:
+
+```text
+Python
+  ↓
+VS Code
+  ↓
+Python extension + Jupyter extension + Pylance
+  ↓
+Project folder
+  ↓
+Virtual environment
+  ↓
+Jupyter notebook
+```
+
+### 20.1. Install Python
+
+#### Windows
+
+1. Download Python from [python.org/downloads](https://www.python.org/downloads/).
+2. Run the installer.
+3. Select **Add Python to PATH**.
+4. Select **Install Now**.
+
+After installation, open a new terminal and check:
+
+```powershell
+python --version
+python -m pip --version
+```
+
+#### Linux
+
+On Ubuntu, Debian, or Linux Mint:
+
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+On Fedora:
+
+```bash
+sudo dnf install python3 python3-pip
+```
+
+On Arch Linux or Manjaro:
+
+```bash
+sudo pacman -S python python-pip
+```
+
+Then check:
+
+```bash
+python3 --version
+python3 -m pip --version
+```
+
+#### macOS with Homebrew
+
+If you do not have Homebrew, install it from [brew.sh](https://brew.sh/).
+
+Then install Python:
+
+```bash
+brew install python
+```
+
+Check:
+
+```bash
+python3 --version
+python3 -m pip --version
+```
+
+### 20.2. Install Visual Studio Code
+
+#### Windows and Linux
+
+1. Download VS Code from [code.visualstudio.com](https://code.visualstudio.com/).
+2. Run the installer for your operating system.
+3. On Windows, select **Add to PATH** if the installer shows that option.
+
+#### macOS with Homebrew
+
+```bash
+brew install --cask visual-studio-code
+```
+
+### 20.3. Install the required VS Code extensions
+
+Open the extensions panel in VS Code:
+
+| System | Shortcut |
+|---|---|
+| Windows and Linux | `Ctrl + Shift + X` |
+| macOS | `Cmd + Shift + X` |
+
+Install these extensions published by Microsoft:
+
+- **Python**;
+- **Jupyter**;
+- **Pylance**.
+
+### 20.4. Create and open the project folder
+
+Create a folder for the course, for example:
+
+```text
+curso-jupyter
+```
+
+In VS Code, open:
+
+```text
+File → Open Folder
+```
+
+You can also create and open it from the terminal.
+
+#### Windows, Linux, and macOS
+
+```bash
+mkdir curso-jupyter
+cd curso-jupyter
+code .
+```
+
+### 20.5. Create a virtual environment
+
+Open the integrated terminal in VS Code:
+
+```text
+Terminal → New Terminal
+```
+
+#### Windows
+
+Create the environment:
+
+```powershell
+python -m venv .venv
+```
+
+Before activating it, allow script execution temporarily for the current terminal:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+Activate the environment:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+#### Linux
+
+Create the environment:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate it:
+
+```bash
+source .venv/bin/activate
+```
+
+#### macOS
+
+Create the environment:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate it:
+
+```bash
+source .venv/bin/activate
+```
+
+When the environment is active, `(.venv)` appears at the beginning of the terminal line.
+
+### 20.6. Install Jupyter and data libraries
+
+With the virtual environment active, install Jupyter:
+
+```bash
+python -m pip install jupyter ipykernel
+```
+
+To work with data analysis, install:
+
+```bash
+python -m pip install numpy pandas matplotlib seaborn scikit-learn openpyxl
+```
+
+These two commands are the same on Windows, Linux, and macOS once the virtual environment is active.
+
+### 20.7. Select the Python interpreter in VS Code
+
+Open the command palette:
+
+| System | Shortcut |
+|---|---|
+| Windows and Linux | `Ctrl + Shift + P` |
+| macOS | `Cmd + Shift + P` |
+
+Select:
+
+```text
+Python: Select Interpreter
+→ Python (.venv)
+```
+
+If several interpreters appear, select the one inside the `.venv` folder.
+
+Common paths:
+
+| System | Interpreter path |
+|---|---|
+| Windows | `.venv\Scripts\python.exe` |
+| Linux and macOS | `.venv/bin/python` |
+
+### 20.8. Create and run a notebook
+
+Create a file named:
+
+```text
+actividad.ipynb
+```
+
+In the upper-right corner of the notebook, select:
+
+```text
+Select Kernel
+→ Python Environments
+→ Python (.venv)
+```
+
+To run a cell:
+
+| System | Shortcut |
+|---|---|
+| Windows, Linux, and macOS | `Shift + Enter` |
+
+### 20.9. Command summary
+
+#### Windows
+
+```powershell
+python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.venv\Scripts\Activate.ps1
+python -m pip install jupyter ipykernel
+python -m pip install numpy pandas matplotlib seaborn scikit-learn openpyxl
+```
+
+#### Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install jupyter ipykernel
+python -m pip install numpy pandas matplotlib seaborn scikit-learn openpyxl
+```
+
+#### macOS with Homebrew
+
+```bash
+brew install python
+brew install --cask visual-studio-code
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install jupyter ipykernel
+python -m pip install numpy pandas matplotlib seaborn scikit-learn openpyxl
+```
+
+<div class="callout callout-success" markdown="1">
+
+### Quick check
+
+Before starting the exercises, confirm:
+
+- VS Code opens the project folder;
+- the terminal shows `(.venv)`;
+- the selected interpreter is inside `.venv`;
+- the notebook kernel is **Python (.venv)**;
+- a cell with `print("Hello, Data Science")` runs correctly.
+
+</div>
+
+---
+
 ## Next session
 
 The next session moves these ideas toward **NumPy** and numerical computing: representing the same data with structures designed for more efficient numerical operations.
