@@ -410,10 +410,26 @@ h3 {
 
 .site-footer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   justify-content: center;
   padding: 34px 0 44px;
   color: var(--muted);
   border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.footer-credits {
+  display: grid;
+  gap: 4px;
+  color: #d7e3f6;
+  line-height: 1.45;
+}
+
+.footer-credits span:last-child {
+  color: var(--cyan);
+  font-weight: 700;
 }
 
 .lesson-layout {
