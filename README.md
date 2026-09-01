@@ -15,12 +15,12 @@ https://dialvebe.github.io/DataScienceProgramming/
 | Session | Topic | Link |
 |---:|---|---|
 | 01 | Python from Scratch | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Estudiantes_New.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Avanzado_New.ipynb) |
-| 02 | Data structures | Coming soon |
-| 03 | NumPy foundations | Coming soon |
-| 04 | Pandas and Polars | Coming soon |
-| 05 | Loading and cleaning data | Coming soon |
-| 06 | Visualization and exploratory analysis | Coming soon |
-| 07 | Reusable analytical code | Coming soon |
+| 02 | NumPy and A1.1 Workshop | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-02/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Estudiantes.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Avanzado.ipynb) |
+| 03 | Pandas | Coming soon |
+| 04 | Data cleaning | Coming soon |
+| 05 | Matplotlib and Seaborn | Coming soon |
+| 06 | Plotly and EDA | Coming soon |
+| 07 | OOP, patterns, and project | Coming soon |
 
 ## Download the Materials
 
@@ -62,12 +62,12 @@ https://dialvebe.github.io/DataScienceProgramming/
 | Sesión | Tema | Enlace |
 |---:|---|---|
 | 01 | Python desde cero | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Estudiantes_New.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Avanzado_New.ipynb) |
-| 02 | Estructuras de datos | Próximamente |
-| 03 | Fundamentos de NumPy | Próximamente |
-| 04 | Pandas y Polars | Próximamente |
-| 05 | Carga y limpieza de datos | Próximamente |
-| 06 | Visualización y análisis exploratorio | Próximamente |
-| 07 | Código analítico reutilizable | Próximamente |
+| 02 | NumPy y taller A1.1 | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-02/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Estudiantes.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Avanzado.ipynb) |
+| 03 | Pandas | Próximamente |
+| 04 | Limpieza de datos | Próximamente |
+| 05 | Matplotlib y Seaborn | Próximamente |
+| 06 | Plotly y EDA | Próximamente |
+| 07 | POO, patrones y proyecto | Próximamente |
 
 ### Descargar los Materiales
 

@@ -38,8 +38,8 @@ const copy = {
     "action.pending": "Pending",
     "lesson.contents": "Contents",
     "lesson.resources": "Resources",
-    "lesson.notebookTitle": "Session 01 Practice Notebooks",
-    "lesson.notebookText": "Download the practice notebooks for this restructured session: one guided version for students and one advanced version for extra challenge.",
+    "lesson.notebookTitle": "Practice Notebooks",
+    "lesson.notebookText": "Download the guided student practice or the advanced challenge for this session.",
     "lesson.downloadStudentNotebook": "Student Practice",
     "lesson.downloadAdvancedNotebook": "Advanced Practice",
     "code.copy": "Copy",
@@ -85,8 +85,8 @@ const copy = {
     "action.pending": "Pendiente",
     "lesson.contents": "Contenido",
     "lesson.resources": "Recursos",
-    "lesson.notebookTitle": "Notebooks de práctica de la sesión 01",
-    "lesson.notebookText": "Descarga los notebooks de práctica de esta sesión reestructurada: una versión guiada para estudiantes y una versión avanzada con mayor reto.",
+    "lesson.notebookTitle": "Notebooks de práctica",
+    "lesson.notebookText": "Descarga la práctica guiada para estudiantes o el reto avanzado de esta sesión.",
     "lesson.downloadStudentNotebook": "Práctica estudiantes",
     "lesson.downloadAdvancedNotebook": "Práctica avanzada",
     "code.copy": "Copiar",
@@ -113,39 +113,46 @@ const sessions = [
   },
   {
     number: "02",
-    ready: false,
-    en: { topic: "Data structures", focus: "Lists, dictionaries, iteration, and structured representations." },
-    es: { topic: "Estructuras de datos", focus: "Listas, diccionarios, iteración y representaciones estructuradas." }
+    href: "sessions/session-02/",
+    ready: true,
+    en: {
+      topic: "NumPy and A1.1 Workshop",
+      focus: "Arrays, vectorized operations, aggregation, boolean filtering, axes, and the first activity workflow."
+    },
+    es: {
+      topic: "NumPy y taller A1.1",
+      focus: "Arreglos, operaciones vectorizadas, agregación, filtrado booleano, ejes y flujo de trabajo de la primera actividad."
+    }
   },
   {
     number: "03",
     ready: false,
-    en: { topic: "NumPy foundations", focus: "Arrays, vectorized operations, indexing, and numerical thinking." },
-    es: { topic: "Fundamentos de NumPy", focus: "Arreglos, operaciones vectorizadas, indexación y pensamiento numérico." }
+    en: { topic: "Pandas", focus: "DataFrames, selection, filtering, transformations, and tabular summaries." },
+    es: { topic: "Pandas", focus: "DataFrames, selección, filtrado, transformaciones y resúmenes tabulares." }
   },
   {
     number: "04",
     ready: false,
-    en: { topic: "Pandas and Polars", focus: "DataFrames, selection, transformations, grouping, and comparison of workflows." },
-    es: { topic: "Pandas y Polars", focus: "DataFrames, selección, transformaciones, agrupación y comparación de flujos." }
+    en: { topic: "Data cleaning", focus: "Missing values, inconsistent data, validation, and reproducible cleaning steps." },
+    es: { topic: "Limpieza de datos", focus: "Valores faltantes, datos inconsistentes, validación y pasos reproducibles de limpieza." }
   },
   {
     number: "05",
     ready: false,
-    en: { topic: "Loading and cleaning data", focus: "Files, missing values, inconsistent data, and reproducible cleaning steps." },
-    es: { topic: "Carga y limpieza de datos", focus: "Archivos, valores faltantes, datos inconsistentes y pasos reproducibles de limpieza." }
+    en: { topic: "Matplotlib and Seaborn", focus: "Static visualization, chart grammar, comparison, distribution, and responsible reading." },
+    es: { topic: "Matplotlib y Seaborn", focus: "Visualización estática, gramática de gráficas, comparación, distribución y lectura responsable." }
   },
   {
     number: "06",
     ready: false,
-    en: { topic: "Visualization and exploratory analysis", focus: "Charts, summaries, patterns, and responsible interpretation." },
-    es: { topic: "Visualización y análisis exploratorio", focus: "Gráficas, resúmenes, patrones e interpretación responsable." }
+    en: { topic: "Plotly and EDA", focus: "Interactive visualization, exploratory analysis, patterns, and communicable findings." },
+    es: { topic: "Plotly y EDA", focus: "Visualización interactiva, análisis exploratorio, patrones y hallazgos comunicables." }
   },
   {
     number: "07",
     ready: false,
-    en: { topic: "Reusable analytical code", focus: "Functions, modules, notebooks, documentation, and final integration." },
-    es: { topic: "Código analítico reutilizable", focus: "Funciones, módulos, notebooks, documentación e integración final." }
+    en: { topic: "OOP, patterns, and project", focus: "Object-oriented programming, reusable patterns, documentation, and final integration." },
+    es: { topic: "POO, patrones y proyecto", focus: "Programación orientada a objetos, patrones reutilizables, documentación e integración final." }
   }
 ];
 
@@ -377,7 +384,8 @@ async function loadLesson(lang) {
   if (!content) return;
 
   status.textContent = copy[lang]["lesson.loading"];
-  const path = `../session-01_${lang}.md`;
+  const sessionId = document.body.dataset.session || "01";
+  const path = `../session-${sessionId}_${lang}.md`;
 
   try {
     const response = await fetch(path, { cache: "no-cache" });
