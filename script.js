@@ -126,7 +126,8 @@ const sessions = [
   },
   {
     number: "03",
-    ready: false,
+    href: "sessions/session-03/",
+    ready: true,
     en: { topic: "Pandas", focus: "DataFrames, selection, filtering, transformations, and tabular summaries." },
     es: { topic: "Pandas", focus: "DataFrames, selección, filtrado, transformaciones y resúmenes tabulares." }
   },
@@ -167,6 +168,9 @@ const schedule = [
 ];
 
 function getLanguage() {
+  const requested = new URLSearchParams(window.location.search).get("lang");
+  if (requested === "es" || requested === "en") return requested;
+
   const saved = localStorage.getItem(STORE_KEY);
   return saved === "es" ? "es" : "en";
 }
