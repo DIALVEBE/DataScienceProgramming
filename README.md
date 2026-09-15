@@ -17,7 +17,7 @@ https://dialvebe.github.io/DataScienceProgramming/
 | 01 | Python from Scratch | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Estudiantes_New.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Avanzado_New.ipynb) |
 | 02 | NumPy and A1.1 Workshop | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-02/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Estudiantes.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Avanzado.ipynb) |
 | 03 | Pandas | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-03/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion3_Practica_Estudiantes.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion3_Practica_Avanzado.ipynb) |
-| 04 | Data cleaning | Coming soon |
+| 04 | Data cleaning | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-04/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Estudiantes.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Avanzado.ipynb) |
 | 05 | Matplotlib and Seaborn | Coming soon |
 | 06 | Plotly and EDA | Coming soon |
 | 07 | OOP, patterns, and project | Coming soon |
@@ -64,7 +64,7 @@ https://dialvebe.github.io/DataScienceProgramming/
 | 01 | Python desde cero | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-01/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Estudiantes_New.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion1_Practica_Avanzado_New.ipynb) |
 | 02 | NumPy y taller A1.1 | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-02/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Estudiantes.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion2_Practica_Avanzado.ipynb) |
 | 03 | Pandas | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-03/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion3_Practica_Estudiantes.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion3_Practica_Avanzado.ipynb) |
-| 04 | Limpieza de datos | Próximamente |
+| 04 | Limpieza de datos | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-04/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Estudiantes.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Avanzado.ipynb) |
 | 05 | Matplotlib y Seaborn | Próximamente |
 | 06 | Plotly y EDA | Próximamente |
 | 07 | POO, patrones y proyecto | Próximamente |

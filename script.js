@@ -133,7 +133,8 @@ const sessions = [
   },
   {
     number: "04",
-    ready: false,
+    href: "sessions/session-04/",
+    ready: true,
     en: { topic: "Data cleaning", focus: "Missing values, inconsistent data, validation, and reproducible cleaning steps." },
     es: { topic: "Limpieza de datos", focus: "Valores faltantes, datos inconsistentes, validación y pasos reproducibles de limpieza." }
   },
