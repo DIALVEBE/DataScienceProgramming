@@ -140,7 +140,8 @@ const sessions = [
   },
   {
     number: "05",
-    ready: false,
+    href: "sessions/session-05/",
+    ready: true,
     en: { topic: "Matplotlib and Seaborn", focus: "Static visualization, chart grammar, comparison, distribution, and responsible reading." },
     es: { topic: "Matplotlib y Seaborn", focus: "Visualización estática, gramática de gráficas, comparación, distribución y lectura responsable." }
   },
