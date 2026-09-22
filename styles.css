@@ -565,6 +565,34 @@ h3 {
   margin: 20px 0;
 }
 
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.chart-figure {
+  margin: 28px 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  overflow-x: auto;
+}
+
+.chart-figure img {
+  display: block;
+  width: 100%;
+  min-width: 760px;
+  border-radius: var(--radius);
+}
+
+.chart-figure figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 .markdown-body th,
 .markdown-body td {
   padding: 12px 14px;
@@ -787,6 +815,14 @@ details > summary {
 
   .resource-actions .button {
     width: 100%;
+  }
+
+  .chart-figure {
+    padding: 10px;
+  }
+
+  .chart-figure img {
+    min-width: 680px;
   }
 
   .sessions-table {

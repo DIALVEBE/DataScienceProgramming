@@ -231,7 +231,191 @@ Column names must be exact. If the DataFrame has `survived`, `Survived` and `sur
 
 ---
 
-## 9. Practice notebooks
+## 9. Visual decision guide
+
+Use this guide when you receive a new dataset and need to decide what to visualize. The goal is not to memorize functions. The goal is to convert a data question into a chart that supports analysis.
+
+```mermaid
+flowchart LR
+    P[Question] --> V[Variables]
+    V --> G[Chart]
+    G --> I[Interpretation]
+    I --> L[Limit]
+```
+
+| Step | What to decide | Useful checks |
+|---|---|---|
+| Question | What do I want to discover? | Write the question before coding. |
+| Variables | Which columns do I need and what type are they? | `df.head()`, `df.info()`, `df.dtypes`, `df.columns` |
+| Chart | Which chart answers that question best? | Match chart type to variable types. |
+| Interpretation | What do I see, what does it mean, and what can I not conclude? | Use evidence, not guesses. |
+
+<figure class="chart-figure">
+  <img src="../../assets/session-05/visual-guide-gallery-en.svg" alt="Matplotlib gallery with histogram, bar chart, scatterplot, boxplot, line chart, and heatmap examples in English.">
+  <figcaption>Examples generated with Matplotlib: each chart type answers a different kind of question.</figcaption>
+</figure>
+
+### 9.1 Quick chart selector
+
+| I want to analyze... | Variables | Recommended chart |
+|---|---|---|
+| Distribution of one variable | 1 numeric | Histogram |
+| Number of records by category | 1 categorical | Countplot or bars |
+| A value across categories | Categorical + numeric | Bar chart |
+| Relationship between two variables | Numeric + numeric | Scatterplot |
+| Distribution across groups | Categorical + numeric | Boxplot or violinplot |
+| Change over time | Time + numeric | Line chart |
+| Relationships among many numeric variables | Several numeric variables | Correlation heatmap |
+
+The choice depends on the question, not only on the columns available.
+
+### 9.2 Common chart patterns
+
+Histogram for one numeric distribution:
+
+```python
+fig, ax = plt.subplots(figsize=(8, 4))
+sns.histplot(data=df, x="age", bins=20, kde=True, ax=ax)
+ax.set_title("Age distribution")
+ax.set_xlabel("Age (years)")
+ax.set_ylabel("Number of records")
+plt.show()
+```
+
+Bar chart after grouping:
+
+```python
+sales_city = (
+    df.groupby("city", as_index=False)["sales"]
+      .sum()
+)
+
+fig, ax = plt.subplots(figsize=(8, 4))
+sns.barplot(data=sales_city, x="city", y="sales", ax=ax)
+ax.set_title("Total sales by city")
+ax.set_xlabel("City")
+ax.set_ylabel("Total sales (COP)")
+plt.xticks(rotation=45)
+plt.show()
+```
+
+Scatterplot with a third categorical variable:
+
+```python
+fig, ax = plt.subplots(figsize=(8, 4))
+sns.scatterplot(
+    data=df,
+    x="study_hours",
+    y="final_score",
+    hue="program",
+    ax=ax
+)
+ax.set_title("Study hours and final score by program")
+ax.set_xlabel("Study hours per week")
+ax.set_ylabel("Final score")
+plt.show()
+```
+
+Correlation heatmap:
+
+```python
+numeric = df.select_dtypes(include="number")
+correlations = numeric.corr()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.heatmap(correlations, annot=True, vmin=-1, vmax=1, cmap="coolwarm", ax=ax)
+ax.set_title("Correlation matrix")
+plt.show()
+```
+
+### 9.3 What every good chart needs
+
+| Component | Why it matters |
+|---|---|
+| Descriptive title | Explains what is being shown. |
+| X and Y labels | Clarify variables and units. |
+| Legend | Explains color, size, or style mappings. |
+| Readable scale | Prevents overlapping labels and unreadable values. |
+| Adequate size | Avoids hiding patterns. |
+| Interpretation | Connects the chart to the analytical question. |
+
+Customize only when the change improves clarity:
+
+```python
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.set_theme(style="whitegrid")
+ax.grid(alpha=0.3)
+plt.xticks(rotation=45)
+```
+
+### 9.4 Interpreting without overstating
+
+A useful interpretation has three levels:
+
+| Level | Question | Example |
+|---|---|---|
+| See | What is visible? | Most scores are between 3.0 and 4.2. |
+| Meaning | What does that suggest for the question? | The group tends to show medium-to-high performance. |
+| Limit | What can I not conclude? | The chart does not identify the causes of those scores. |
+
+Avoid conclusions that are stronger than the chart supports. A scatterplot can suggest association, but it does not prove causality.
+
+### 9.5 When Plotly is useful
+
+Matplotlib and Seaborn create mostly static visualizations. Plotly is useful when interactivity helps the analysis:
+
+| Need | Why Plotly helps |
+|---|---|
+| Inspect individual points | Hover can show row-level details. |
+| Explore dense charts | Zoom and pan help with many observations. |
+| Compare categories interactively | Legends can hide or show groups. |
+| Add contextual fields | `hover_data` can reveal extra columns. |
+
+Use interactivity when it adds information, not just because it looks different.
+
+### 9.6 Prompt template for AI support
+
+When asking an AI tool for help, provide the analytical decision first:
+
+```text
+I have a DataFrame named df.
+
+Relevant columns:
+- study_hours: study hours per week.
+- final_score: final score from 0 to 5.
+- program: academic program.
+
+Question:
+Is there a relationship between study hours and final score?
+
+I think a scatterplot is appropriate.
+
+Generate Python code with Seaborn and Matplotlib.
+Use fig, ax = plt.subplots().
+Include a descriptive title, X label, Y label, units when needed, and a legend if color is used.
+Do not modify the original DataFrame.
+Then explain what I should observe to interpret the chart.
+Do not invent conclusions that cannot be obtained from the data.
+```
+
+Before trusting generated code, check `df.columns`, `df.dtypes`, missing values, and whether the chart actually matches the question.
+
+### 9.7 Delivery checklist
+
+Before submitting a visualization, verify:
+
+1. The question is clear.
+2. The variables and their types are identified.
+3. The chart type matches the question.
+4. The chart has title, axis labels, units, and legend when needed.
+5. Categories are readable.
+6. The written interpretation says what you see, what it means, and what remains uncertain.
+7. You do not confuse correlation with causality.
+8. The notebook runs without errors and does not accidentally modify the original dataset.
+
+---
+
+## 10. Practice notebooks
 
 Download the version that matches your route:
 
@@ -244,7 +428,7 @@ The advanced notebook is intentionally strict: it asks functions to return `(fig
 
 ---
 
-## 10. Before the next session
+## 11. Before the next session
 
 Prepare five charts for a dataset related to your project or activity.
 
@@ -258,7 +442,7 @@ Prepare five charts for a dataset related to your project or activity.
 
 ---
 
-## 11. Summary
+## 12. Summary
 
 Three rules to keep:
 

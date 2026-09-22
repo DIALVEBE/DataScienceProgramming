@@ -231,7 +231,191 @@ Los nombres de columna deben ser exactos. Si el DataFrame tiene `survived`, `Sur
 
 ---
 
-## 9. Notebooks de práctica
+## 9. Guía de decisión visual
+
+Usa esta guía cuando recibas un dataset nuevo y necesites decidir qué visualizar. El objetivo no es memorizar funciones. El objetivo es convertir una pregunta sobre los datos en una gráfica que apoye el análisis.
+
+```mermaid
+flowchart LR
+    P[Pregunta] --> V[Variables]
+    V --> G[Gráfica]
+    G --> I[Interpretación]
+    I --> L[Límite]
+```
+
+| Paso | Qué debes decidir | Revisiones útiles |
+|---|---|---|
+| Pregunta | ¿Qué quiero descubrir? | Escribe la pregunta antes de programar. |
+| Variables | ¿Qué columnas necesito y de qué tipo son? | `df.head()`, `df.info()`, `df.dtypes`, `df.columns` |
+| Gráfica | ¿Qué gráfica responde mejor esa pregunta? | Relaciona el tipo de gráfica con los tipos de variables. |
+| Interpretación | ¿Qué veo, qué significa y qué no puedo concluir? | Usa evidencia, no suposiciones. |
+
+<figure class="chart-figure">
+  <img src="../../assets/session-05/visual-guide-gallery-es.svg" alt="Galería de Matplotlib con ejemplos de histograma, barras, dispersión, boxplot, línea y mapa de calor en español.">
+  <figcaption>Ejemplos generados con Matplotlib: cada tipo de gráfica responde una clase distinta de pregunta.</figcaption>
+</figure>
+
+### 9.1 Selector rápido de gráficas
+
+| Quiero analizar... | Variables | Gráfica recomendada |
+|---|---|---|
+| Distribución de una variable | 1 numérica | Histograma |
+| Cantidad de registros por categoría | 1 categórica | Countplot o barras |
+| Un valor entre categorías | Categórica + numérica | Gráfica de barras |
+| Relación entre dos variables | Numérica + numérica | Gráfica de dispersión |
+| Distribución entre grupos | Categórica + numérica | Boxplot o violinplot |
+| Cambio en el tiempo | Tiempo + numérica | Gráfica de línea |
+| Relaciones entre muchas variables numéricas | Varias variables numéricas | Mapa de calor de correlaciones |
+
+La elección depende de la pregunta, no solamente de las columnas disponibles.
+
+### 9.2 Patrones comunes de código
+
+Histograma para una distribución numérica:
+
+```python
+fig, ax = plt.subplots(figsize=(8, 4))
+sns.histplot(data=df, x="edad", bins=20, kde=True, ax=ax)
+ax.set_title("Distribución de edades")
+ax.set_xlabel("Edad (años)")
+ax.set_ylabel("Cantidad de registros")
+plt.show()
+```
+
+Gráfica de barras después de agrupar:
+
+```python
+ventas_ciudad = (
+    df.groupby("ciudad", as_index=False)["ventas"]
+      .sum()
+)
+
+fig, ax = plt.subplots(figsize=(8, 4))
+sns.barplot(data=ventas_ciudad, x="ciudad", y="ventas", ax=ax)
+ax.set_title("Ventas totales por ciudad")
+ax.set_xlabel("Ciudad")
+ax.set_ylabel("Ventas totales (COP)")
+plt.xticks(rotation=45)
+plt.show()
+```
+
+Gráfica de dispersión con una tercera variable categórica:
+
+```python
+fig, ax = plt.subplots(figsize=(8, 4))
+sns.scatterplot(
+    data=df,
+    x="horas_estudio",
+    y="nota_final",
+    hue="programa",
+    ax=ax
+)
+ax.set_title("Horas de estudio y nota final por programa")
+ax.set_xlabel("Horas de estudio por semana")
+ax.set_ylabel("Nota final")
+plt.show()
+```
+
+Mapa de calor de correlaciones:
+
+```python
+numericas = df.select_dtypes(include="number")
+correlaciones = numericas.corr()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.heatmap(correlaciones, annot=True, vmin=-1, vmax=1, cmap="coolwarm", ax=ax)
+ax.set_title("Matriz de correlaciones")
+plt.show()
+```
+
+### 9.3 Qué debe tener una buena gráfica
+
+| Componente | Por qué importa |
+|---|---|
+| Título descriptivo | Explica qué se está mostrando. |
+| Etiquetas en X y Y | Aclaran variables y unidades. |
+| Leyenda | Explica colores, tamaños o estilos. |
+| Escala legible | Evita etiquetas superpuestas y valores difíciles de leer. |
+| Tamaño adecuado | Evita ocultar patrones. |
+| Interpretación | Conecta la gráfica con la pregunta analítica. |
+
+Personaliza solo cuando el cambio mejore la claridad:
+
+```python
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.set_theme(style="whitegrid")
+ax.grid(alpha=0.3)
+plt.xticks(rotation=45)
+```
+
+### 9.4 Interpretar sin exagerar
+
+Una interpretación útil tiene tres niveles:
+
+| Nivel | Pregunta | Ejemplo |
+|---|---|---|
+| Veo | ¿Qué es visible? | La mayoría de notas está entre 3.0 y 4.2. |
+| Significa | ¿Qué sugiere eso frente a la pregunta? | El grupo tiende a mostrar desempeño medio o alto. |
+| Límite | ¿Qué no puedo concluir? | La gráfica no identifica las causas de esas notas. |
+
+Evita conclusiones más fuertes de lo que la gráfica permite sostener. Una gráfica de dispersión puede sugerir asociación, pero no prueba causalidad.
+
+### 9.5 Cuándo usar Plotly
+
+Matplotlib y Seaborn producen visualizaciones principalmente estáticas. Plotly resulta útil cuando la interactividad mejora el análisis:
+
+| Necesidad | Por qué ayuda Plotly |
+|---|---|
+| Inspeccionar puntos individuales | El cursor puede mostrar detalles por fila. |
+| Explorar gráficas densas | El zoom y el desplazamiento ayudan con muchas observaciones. |
+| Comparar categorías de forma interactiva | La leyenda puede ocultar o mostrar grupos. |
+| Agregar campos de contexto | `hover_data` puede revelar columnas adicionales. |
+
+Usa interactividad cuando aporte información, no solo porque se vea diferente.
+
+### 9.6 Plantilla de prompt para apoyo con IA
+
+Cuando pidas ayuda a una herramienta de IA, entrega primero la decisión analítica:
+
+```text
+Tengo un DataFrame llamado df.
+
+Columnas relevantes:
+- horas_estudio: horas de estudio por semana.
+- nota_final: nota final entre 0 y 5.
+- programa: programa académico.
+
+Pregunta:
+¿Existe una relación entre las horas de estudio y la nota final?
+
+Considero que una gráfica de dispersión puede ser apropiada.
+
+Genera código en Python con Seaborn y Matplotlib.
+Usa fig, ax = plt.subplots().
+Incluye título descriptivo, nombre del eje X, nombre del eje Y, unidades cuando correspondan y leyenda si se usa color.
+No modifiques el DataFrame original.
+Después explícame qué debo observar para interpretar la gráfica.
+No inventes conclusiones que no puedan obtenerse de los datos.
+```
+
+Antes de confiar en código generado, revisa `df.columns`, `df.dtypes`, valores faltantes y si la gráfica realmente corresponde a la pregunta.
+
+### 9.7 Checklist antes de entregar
+
+Antes de entregar una visualización, verifica:
+
+1. La pregunta es clara.
+2. Las variables y sus tipos están identificados.
+3. El tipo de gráfica corresponde a la pregunta.
+4. La gráfica tiene título, etiquetas de ejes, unidades y leyenda cuando se necesita.
+5. Las categorías se pueden leer.
+6. La interpretación escrita dice qué ves, qué significa y qué sigue siendo incierto.
+7. No confundes correlación con causalidad.
+8. El notebook ejecuta sin errores y no modifica accidentalmente el dataset original.
+
+---
+
+## 10. Notebooks de práctica
 
 Descarga la versión que corresponda a tu ruta:
 
@@ -244,7 +428,7 @@ El notebook avanzado es intencionalmente estricto: pide que las funciones devuel
 
 ---
 
-## 10. Antes de la próxima sesión
+## 11. Antes de la próxima sesión
 
 Prepara cinco gráficas para un conjunto de datos relacionado con tu proyecto o actividad.
 
@@ -258,7 +442,7 @@ Prepara cinco gráficas para un conjunto de datos relacionado con tu proyecto o 
 
 ---
 
-## 11. Resumen
+## 12. Resumen
 
 Tres reglas para conservar:
 

@@ -296,12 +296,14 @@ function renderNodes(nodes) {
   }).join("");
 }
 
-function enhanceLesson() {
+async function enhanceLesson() {
   const lang = getLanguage();
+  const sessionId = document.body.dataset.session || "page";
 
-  document.querySelectorAll(".markdown-body pre code.language-mermaid").forEach((code) => {
+  document.querySelectorAll(".markdown-body pre code.language-mermaid").forEach((code, index) => {
     const wrapper = document.createElement("div");
     wrapper.className = "mermaid";
+    wrapper.id = `dsp-mermaid-${sessionId}-${lang}-${index}`;
     wrapper.textContent = code.textContent;
     code.closest("pre").replaceWith(wrapper);
   });
@@ -319,21 +321,39 @@ function enhanceLesson() {
       .join("");
   }
 
-  if (window.mermaid) {
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: "dark",
-      securityLevel: "loose",
-      themeVariables: {
-        primaryColor: "#0b1020",
-        primaryTextColor: "#eef6ff",
-        primaryBorderColor: "#62f7ff",
-        lineColor: "#ff4fd8",
-        secondaryColor: "#111a30",
-        tertiaryColor: "#061018"
-      }
-    });
-    mermaid.run({ querySelector: ".mermaid" });
+  await renderMermaidDiagrams();
+}
+
+async function renderMermaidDiagrams() {
+  if (!window.mermaid) return;
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "dark",
+    securityLevel: "loose",
+    themeVariables: {
+      primaryColor: "#0b1020",
+      primaryTextColor: "#eef6ff",
+      primaryBorderColor: "#62f7ff",
+      lineColor: "#ff4fd8",
+      secondaryColor: "#111a30",
+      tertiaryColor: "#061018"
+    }
+  });
+
+  const diagrams = Array.from(document.querySelectorAll(".mermaid"));
+  for (const diagram of diagrams) {
+    const source = diagram.textContent.trim();
+    if (!source) continue;
+
+    try {
+      const { svg, bindFunctions } = await mermaid.render(`${diagram.id}-svg`, source);
+      diagram.innerHTML = svg;
+      if (bindFunctions) bindFunctions(diagram);
+    } catch (error) {
+      diagram.textContent = source;
+      console.error(error);
+    }
   }
 }
 
@@ -399,10 +419,21 @@ async function loadLesson(lang) {
     const markdown = await response.text();
     content.innerHTML = renderNodes(parseContainers(markdown));
     status.textContent = "";
-    enhanceLesson();
+    await enhanceLesson();
+    scrollToHashTarget();
   } catch (error) {
     status.textContent = copy[lang]["lesson.error"];
     console.error(error);
+  }
+}
+
+function scrollToHashTarget() {
+  if (!window.location.hash) return;
+
+  const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+  if (target) {
+    target.scrollIntoView({ block: "start" });
+    window.setTimeout(() => target.scrollIntoView({ block: "start" }), 80);
   }
 }
 
