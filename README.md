@@ -20,7 +20,7 @@ https://dialvebe.github.io/DataScienceProgramming/
 | 04 | Data cleaning | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-04/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Estudiantes.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Avanzado.ipynb) |
 | 05 | Matplotlib and Seaborn | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-05/) · [Student practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion5_Practica_Estudiantes.ipynb) · [Advanced practice](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion5_Practica_Avanzado.ipynb) |
 | 06 | Plotly and EDA | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-06/) · [Project repository](https://github.com/DIALVEBE/supermart-poo) |
-| 07 | OOP, patterns, and project | Coming soon |
+| 07 | Final pipeline guide | [Open session](https://dialvebe.github.io/DataScienceProgramming/sessions/session-07/) |
 
 ## Download the Materials
 
@@ -67,7 +67,7 @@ https://dialvebe.github.io/DataScienceProgramming/
 | 04 | Limpieza de datos | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-04/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Estudiantes.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion4_Practica_Avanzado.ipynb) |
 | 05 | Matplotlib y Seaborn | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-05/) · [Práctica estudiantes](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion5_Practica_Estudiantes.ipynb) · [Práctica avanzada](https://dialvebe.github.io/DataScienceProgramming/sessions/DSP_Sesion5_Practica_Avanzado.ipynb) |
 | 06 | Plotly y EDA | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-06/) · [Repositorio del proyecto](https://github.com/DIALVEBE/supermart-poo) |
-| 07 | POO, patrones y proyecto | Próximamente |
+| 07 | Guía final de pipeline | [Abrir sesión](https://dialvebe.github.io/DataScienceProgramming/sessions/session-07/) |
 
 ### Descargar los Materiales
 

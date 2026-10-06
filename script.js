@@ -45,6 +45,9 @@ const copy = {
     "lesson.repositoryTitle": "Session Repository",
     "lesson.repositoryText": "Open the Supermart OOP project repository used as the working base for this session.",
     "lesson.openRepository": "Open Repository",
+    "lesson.guideTitle": "Quick Pipeline Guide",
+    "lesson.guideText": "Use this final session as a compact reference when you need to remember the next step in a data project.",
+    "lesson.openCourseRepo": "Open Course Repository",
     "code.copy": "Copy",
     "code.copied": "Copied",
     "lesson.loading": "Loading session...",
@@ -95,6 +98,9 @@ const copy = {
     "lesson.repositoryTitle": "Repositorio de la sesión",
     "lesson.repositoryText": "Abre el repositorio Supermart POO que se usa como base de trabajo para esta sesión.",
     "lesson.openRepository": "Abrir repositorio",
+    "lesson.guideTitle": "Guía rápida de pipeline",
+    "lesson.guideText": "Usa esta sesión final como una referencia compacta cuando necesites recordar el siguiente paso en un proyecto de datos.",
+    "lesson.openCourseRepo": "Abrir repositorio del curso",
     "code.copy": "Copiar",
     "code.copied": "Copiado",
     "lesson.loading": "Cargando sesión...",
@@ -160,9 +166,10 @@ const sessions = [
   },
   {
     number: "07",
-    ready: false,
-    en: { topic: "OOP, patterns, and project", focus: "Object-oriented programming, reusable patterns, documentation, and final integration." },
-    es: { topic: "POO, patrones y proyecto", focus: "Programación orientada a objetos, patrones reutilizables, documentación e integración final." }
+    href: "sessions/session-07/",
+    ready: true,
+    en: { topic: "Final pipeline guide", focus: "A compact reference for loading, cleaning, transforming, visualizing, debugging, and organizing data projects." },
+    es: { topic: "Guía final de pipeline", focus: "Referencia compacta para cargar, limpiar, transformar, visualizar, depurar y organizar proyectos de datos." }
   }
 ];
 
