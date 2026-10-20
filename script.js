@@ -2,6 +2,12 @@ const STORE_KEY = "dsp-language";
 
 const copy = {
   en: {
+    "brand.homeLabel": "Data Science Programming home",
+    "nav.primaryLabel": "Primary navigation",
+    "nav.sessionLabel": "Session navigation",
+    "nav.languageLabel": "Language selector",
+    "nav.englishLabel": "Switch to English",
+    "nav.spanishLabel": "Switch to Spanish",
     "nav.sessions": "Sessions",
     "nav.map": "Course Map",
     "nav.home": "Home",
@@ -52,9 +58,20 @@ const copy = {
     "code.copied": "Copied",
     "lesson.loading": "Loading session...",
     "lesson.error": "The session could not be loaded.",
-    "lesson.back": "Back to course table of contents"
+    "lesson.back": "Back to course table of contents",
+    "lesson.tocLabel": "Session table of contents",
+    "lesson.resourcesLabel": "Session resources",
+    "lesson.sessionLabel": "Session",
+    "page.homeDescription": "Bilingual course site for Data Science Programming.",
+    "page.sessionDescription": "Data Science Programming session guide."
   },
   es: {
+    "brand.homeLabel": "Inicio de Data Science Programming",
+    "nav.primaryLabel": "Navegación principal",
+    "nav.sessionLabel": "Navegación de la sesión",
+    "nav.languageLabel": "Selector de idioma",
+    "nav.englishLabel": "Cambiar a inglés",
+    "nav.spanishLabel": "Cambiar a español",
     "nav.sessions": "Sesiones",
     "nav.map": "Mapa del curso",
     "nav.home": "Inicio",
@@ -105,7 +122,12 @@ const copy = {
     "code.copied": "Copiado",
     "lesson.loading": "Cargando sesión...",
     "lesson.error": "No se pudo cargar la sesión.",
-    "lesson.back": "Volver a la tabla de contenido del curso"
+    "lesson.back": "Volver a la tabla de contenido del curso",
+    "lesson.tocLabel": "Tabla de contenido de la sesión",
+    "lesson.resourcesLabel": "Recursos de la sesión",
+    "lesson.sessionLabel": "Sesión",
+    "page.homeDescription": "Sitio bilingüe del curso Data Science Programming.",
+    "page.sessionDescription": "Guía de sesión de Data Science Programming."
   }
 };
 
@@ -193,17 +215,43 @@ function getLanguage() {
 
 function setLanguage(lang) {
   localStorage.setItem(STORE_KEY, lang);
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", lang);
+  window.history.replaceState({}, "", url);
   document.documentElement.lang = lang;
   document.querySelectorAll(".lang-button").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.lang === lang);
+    const isActive = button.dataset.lang === lang;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
   });
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.dataset.i18n;
     if (copy[lang][key]) node.textContent = copy[lang][key];
   });
+  document.querySelectorAll("[data-i18n-attr]").forEach((node) => {
+    node.dataset.i18nAttr.split(";").forEach((entry) => {
+      const [attribute, key] = entry.split(":");
+      if (attribute && key && copy[lang][key]) node.setAttribute(attribute, copy[lang][key]);
+    });
+  });
+  updatePageMetadata(lang);
   renderSessionRows(lang);
   renderSchedule(lang);
   if (document.body.dataset.page === "session") loadLesson(lang);
+}
+
+function updatePageMetadata(lang) {
+  const sessionId = document.body.dataset.session;
+  const isSession = document.body.dataset.page === "session" && sessionId;
+  const label = isSession ? `${copy[lang]["lesson.sessionLabel"]} ${sessionId}` : "Data Science Programming";
+
+  document.title = `${label} · Data Science Programming`;
+  const description = document.querySelector('meta[name="description"]');
+  if (description) description.setAttribute("content", isSession ? copy[lang]["page.sessionDescription"] : copy[lang]["page.homeDescription"]);
+
+  document.querySelectorAll("[data-session-label]").forEach((node) => {
+    node.textContent = `${copy[lang]["lesson.sessionLabel"]} ${sessionId}`;
+  });
 }
 
 function renderSchedule(lang) {
